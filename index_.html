@@ -9,9 +9,102 @@
 
     <title>The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors</title>
     <link href="https://sensor-js.xyz/assets/css/bootstrap.min.css" rel="stylesheet">
-
+	
     <!-- CSS to customize styles -->
     <link href="https://sensor-js.xyz/assets/css/custom.css" rel="stylesheet">
+	
+	<script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery-1.9.1.min.js"></script>
+	 <link rel="stylesheet" href="https://sensor-js.xyz/assets/css/jquery-ui.css" />
+	<script src="https://sensor-js.xyz/assets/js/jquery-ui.min.js"></script>
+		<style type="text/css" title="currentStyle">
+		        @import "https://webtransparency.cs.princeton.edu/webcensus/css/demo_page.css";
+		        @import "https://webtransparency.cs.princeton.edu/webcensus/css/demo_table.css";
+		    </style>
+	
+    <script src="https://sensor-js.xyz/assets/js/popper.min.js"></script>
+    <script src="https://sensor-js.xyz/assets/js/bootstrap.min.js"></script>
+	
+    <script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    	if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+			var msViewportStyle = document.createElement("style");
+			msViewportStyle.appendChild(
+				document.createTextNode(
+					"@-ms-viewport{width:auto!important}"
+				)
+			);
+			document.getElementsByTagName("head")[0].
+				appendChild(msViewportStyle);
+		}
+
+    </script>
+			
+	    <style>
+	        .dataTables_info {
+	            float: none;
+	        }
+	    </style>
+	
+    
+   
+	
+	 <script>
+		
+		$.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain.csv', function(data) {
+
+			// start the table	
+			var html = '<table id ="canvas_fp_urls" class="data-table table table-striped table-bordered">';
+		    html += '<thead><tr><th>Sensor-accessing Domain</th><th>Alexa Sites (at most top 5)</th><th>Total Sites</th></tr></thead>';
+			//html += '<thead><tr><th>Sensor-accessing Domain</th><th>Alexa Sites (at most top 5)</th></tr></thead>';
+			// split into lines
+			var rows = data.split("\n");
+
+		    html+='<tbody>'
+			// parse lines
+			rows.forEach( function getvalues(ourrow) {
+
+				// split line into columns
+				var columns = ourrow.split(",");
+		
+		        if (columns.length < 2) { return; }
+				
+				// start a table row
+				html += "<tr>";
+				
+				html += ourrow;
+				
+				html += "<td>" + columns[0] + "</td>";
+				
+				var sites = columns[1].split(";");
+				var sites_found = "";
+				for (var i = 0; i < sites.length; i++) {
+				    sites_found += sites[i]+"; ";
+				}
+				
+				html += "<td>" + sites_found + "</td>";
+
+				html += "<td>" + columns[2] + "</td>";
+		
+				// close row
+				html += "</tr>";		
+			})
+			// close table
+		    html += "</tbody>";
+			html += "</table>";
+
+			// insert into div
+			$('#table-holder').append(html);
+    
+			$('#canvas_fp_urls').dataTable( {
+		                "iDisplayLength": 25,           
+		                "sDom": '<lfip<t>>',     
+                		"order": [[ 2, "desc" ]]
+		            });
+		});
+
+	</script>
+	
   </head>
 
   <body>
@@ -85,17 +178,24 @@
     </div>
             
     
+    	
+	<div id="interesting-script" class="page-header">
+		<h2>Sensor-accessing domains</h2>
+	</div>
+	
+	<p>In a crawl conducted during May 2018, these domains were found to access various sensors when loaded on the homepahe of different Alexa top 100K sites.<br></p>
+
+
+	<div id="table-holder"></div>
+	
+	
     </main>
 
-    <script src="https://sensor-js.xyz/assets/js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="https://sensor-js.xyz/assets/js/popper.min.js"></script>
-    <script src="https://sensor-js.xyz/assets/js/bootstrap.min.js"></script>
+    
+    
+
 	
-    <script src="assets/js/d3.min.js"></script>
-	
-	
-	
+    
 	
 
   </body>
