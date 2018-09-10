@@ -17,8 +17,8 @@
 	 <link rel="stylesheet" href="https://sensor-js.xyz/assets/css/jquery-ui.css" />
 	<script src="https://sensor-js.xyz/assets/js/jquery-ui.min.js"></script>
 		<style type="text/css" title="currentStyle">
-		        @import "https://webtransparency.cs.princeton.edu/webcensus/css/demo_page.css";
-		        @import "https://webtransparency.cs.princeton.edu/webcensus/css/demo_table.css";
+		        @import "https://sensor-js.xyz/assets/css/demo_page.css";
+		        @import "https://sensor-js.xyz/assets/css/demo_table.css";
 		    </style>
 	
     <script src="https://sensor-js.xyz/assets/js/popper.min.js"></script>
@@ -72,8 +72,6 @@
 				// start a table row
 				html += "<tr>";
 				
-				html += ourrow;
-				
 				html += "<td>" + columns[0] + "</td>";
 				
 				var sites = columns[1].split(";");
@@ -99,7 +97,7 @@
 			$('#canvas_fp_urls').dataTable( {
 		                "iDisplayLength": 25,           
 		                "sDom": '<lfip<t>>',     
-                		"order": [[ 2, "desc" ]]
+                		"aaSorting": [[2, 'desc']],
 		            });
 		});
 
