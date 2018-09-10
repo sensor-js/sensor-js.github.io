@@ -19,7 +19,7 @@
 		<style type="text/css" title="currentStyle">
 		        @import "https://sensor-js.xyz/assets/css/demo_page.css";
 		        @import "https://sensor-js.xyz/assets/css/demo_table.css";
-		    </style>
+		</style>
 	
     <script src="https://sensor-js.xyz/assets/js/popper.min.js"></script>
     <script src="https://sensor-js.xyz/assets/js/bootstrap.min.js"></script>
@@ -40,14 +40,13 @@
 
     </script>
 			
-	    <style>
-	        .dataTables_info {
-	            float: none;
-	        }
-	    </style>
+    <style>
+        .dataTables_info {
+            float: none;
+        }
+    </style>
 	
     
-   
 	
 	 <script>
 		
@@ -67,7 +66,7 @@
 				// split line into columns
 				var columns = ourrow.split(",");
 		
-		        if (columns.length < 2) { return; }
+		        if (columns.length < 3) { return; }
 				
 				// start a table row
 				html += "<tr>";
@@ -77,7 +76,10 @@
 				var sites = columns[1].split(";");
 				var sites_found = "";
 				for (var i = 0; i < sites.length; i++) {
-				    sites_found += sites[i]+"; ";
+					if ( i == sites.length-1){
+						sites_found += sites[i];
+					}
+				    else sites_found += sites[i]+"; ";
 				}
 				
 				html += "<td>" + sites_found + "</td>";
