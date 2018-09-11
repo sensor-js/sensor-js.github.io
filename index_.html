@@ -54,7 +54,7 @@
 
 			// start the table	
 			var html = '<table id ="canvas_fp_urls" class="data-table table table-striped table-bordered">';
-		    html += '<thead><tr><th>Sensor-accessing Domain</th><th>Alexa Sites (at most top 5)</th><th>Total Sites</th></tr></thead>';
+		    html += '<thead><tr><th>Sensor-accessing Domain</th><th>Alexa Sites (at most top 5)</th><th>Total Sites</th></tr><th>Prominence</th></tr></thead>';
 			//html += '<thead><tr><th>Sensor-accessing Domain</th><th>Alexa Sites (at most top 5)</th></tr></thead>';
 			// split into lines
 			var rows = data.split("\n");
@@ -66,7 +66,7 @@
 				// split line into columns
 				var columns = ourrow.split(",");
 		
-		        if (columns.length < 3) { return; }
+		        if (columns.length < 4) { return; }
 				
 				// start a table row
 				html += "<tr>";
@@ -85,6 +85,8 @@
 				html += "<td>" + sites_found + "</td>";
 
 				html += "<td>" + columns[2] + "</td>";
+				
+				html += "<td>" + columns[3] + "</td>";
 		
 				// close row
 				html += "</tr>";		
@@ -183,7 +185,7 @@
 		<h2>Sensor-accessing domains</h2>
 	</div>
 	
-	<p>In a crawl conducted during May 2018, these domains were found to access various sensors when loaded on the homepahe of different Alexa top 100K sites.<br></p>
+	<p>In a crawl conducted during May 2018, these domains were found to access various sensors when loaded on the homepage of different Alexa top 100K sites.<br></p>
 
 
 	<div id="table-holder"></div>
