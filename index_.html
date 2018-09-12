@@ -9,9 +9,118 @@
 
     <title>The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors</title>
     <link href="https://sensor-js.xyz/assets/css/bootstrap.min.css" rel="stylesheet">
-
+	
     <!-- CSS to customize styles -->
     <link href="https://sensor-js.xyz/assets/css/custom.css" rel="stylesheet">
+	
+	<script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery-1.9.1.min.js"></script>
+	 <link rel="stylesheet" href="https://sensor-js.xyz/assets/css/jquery-ui.css" />
+	<script src="https://sensor-js.xyz/assets/js/jquery-ui.min.js"></script>
+		<style type="text/css" title="currentStyle">
+		        @import "https://sensor-js.xyz/assets/css/demo_page.css";
+		        @import "https://sensor-js.xyz/assets/css/demo_table.css";
+		</style>
+	
+    <script src="https://sensor-js.xyz/assets/js/popper.min.js"></script>
+    <script src="https://sensor-js.xyz/assets/js/bootstrap.min.js"></script>
+	
+    <script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    	if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+			var msViewportStyle = document.createElement("style");
+			msViewportStyle.appendChild(
+				document.createTextNode(
+					"@-ms-viewport{width:auto!important}"
+				)
+			);
+			document.getElementsByTagName("head")[0].
+				appendChild(msViewportStyle);
+		}
+
+    </script>
+			
+    
+    
+	
+	 <script>
+		
+		$.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain.csv', function(data) {
+
+			// start the table	
+			var html = '<table id ="canvas_fp_urls" class="data-table table table-striped table-bordered">';
+		    html += '<thead><tr><th>Sensor-accessing Domain</th><th>Alexa Sites (at most top 5)</th><th>Total Sites</th><th>Prominence</th></tr></thead>';
+			//html += '<thead><tr><th>Sensor-accessing Domain</th><th>Alexa Sites (at most top 5)</th></tr></thead>';
+			// split into lines
+			var rows = data.split("\n");
+
+		    html+='<tbody>'
+			// parse lines
+			rows.forEach( function getvalues(ourrow) {
+
+				// split line into columns
+				var columns = ourrow.split(",");
+		
+		        if (columns.length < 4) { return; }
+				
+				// start a table row
+				html += "<tr>";
+				
+				html += "<td>" + columns[0] + "</td>";
+				
+				var sites = columns[1].split(";");
+				var sites_found = "";
+				for (var i = 0; i < sites.length; i++) {
+					if ( i == sites.length-1){
+						sites_found += sites[i];
+					}
+				    else sites_found += sites[i]+"; ";
+				}
+				
+				html += "<td>" + sites_found + "</td>";
+
+				html += "<td>" + columns[2] + "</td>";
+				
+				html += "<td>" + columns[3] + "</td>";
+		
+				// close row
+				html += "</tr>";		
+			})
+			// close table
+		    html += "</tbody>";
+			html += "</table>";
+
+			// insert into div
+			$('#table-holder').append(html);
+    
+			$('#canvas_fp_urls').dataTable( {
+		                "iDisplayLength": 25,           
+		                "sDom": '<lfip<t>>',     
+                		"aaSorting": [[2, 'desc']],
+		            });
+		});
+
+	</script>
+	
+	<style>
+	* {
+	    box-sizing: border-box;
+	}
+
+	.column {
+	    float: left;
+	    width: 50%;
+	    padding: 20px;
+	}
+
+	/* Clearfix (clear floats) */
+	.row::after {
+	    content: "";
+	    clear: both;
+	    display: table;
+	}
+	</style>
+	
   </head>
 
   <body>
@@ -76,7 +185,7 @@
     <h2>Contact</h2>
     <div class="col-md-6">
     <table class="table table-striped table-bordered">
-      <tr class="success"><td><a href="http://www4.ncsu.edu/~adas8/"><b>Anupam Das</b></a> </td><td> <code>anupam.das@ncsu.edu</code> </td></tr>
+      <tr class="success"><td><a href="https://www.anupamdas.org/"><b>Anupam Das</b></a> </td><td> <code>anupam.das@ncsu.edu</code> </td></tr>
 			<tr class="active"><td><a href="https://www.esat.kuleuven.be/cosic/people/gunes-acar/"><b>Gunes Acar</b></a> </td><td><code>gunes@princeton.edu</code></a></td></tr>
       <tr class="warning"><td><a href="https://ece.illinois.edu/directory/profile/nikita"><b>Nikita Borisov</b></a> </td><td> <code>nikita@illinois.edu</code> </td></tr>
       <tr class="danger"><td><a href="http://amoghbl1.com/"><b>Amogh Pradeep</b></a></td><td> <code>a.pradeep@northeastern.edu</code></td></tr>
@@ -85,11 +194,316 @@
     </div>
             
     
+	<div id="intersting-results" class="page-header">
+		<h2>Interesting takeaways</h2>
+	</div>
+	<br>
+	
+	<div id="prevalence-script" class="page-header">
+		<h4>Sensor-accessing scripts are quite prevalent</h4>
+	</div>
+	
+		<p>
+		From our crawl results we found that sensor APIs were accessed on 3695 of the 100K websites by scripts served from 603 distinct domains. Orientation and motion sensors are by far the most frequently accessed, on 2653 and 2036 sites respectively. This can be explained by common browser support for these APIs. Light and proximity sensors, which are only supported by Firefox, are accessed on fewer than 200 sites each. We also found that these sensor-accessing scripts were being served predominately on top ranked websites. <br> 
+		In terms of first and third parties, we found that first-party scripts that access sensor APIs are slightly more common than third-party scripts. Our sensor exfiltration analysis revealed that many bot detection and mitigation scripts such as those provided by <em>perimeterx.net</em> and <em>b2c.com</em> are served from the clients' first party domains.
+		</p>
+		<div class="row" align="center">
+			<div class="column">
+			<table class="table table-striped table-bordered">
+			  <tr>
+			    <th>Sensor</th>
+			    <th>Num. of sites</th>
+			    <th>Num. of script domains</th>
+			  </tr>
+			  <tr>
+			    <td>Motion</td>
+			    <td>2653</td>
+			    <td>384</td>
+			  </tr>
+			  <tr>
+			    <td>Orientation</td>
+			    <td>2036</td>
+			    <td>420</td>
+			  </tr>
+			  <tr>
+			    <td>Proximity</td>
+			    <td>186</td>
+			    <td>50</td>
+			  </tr>
+			  <tr>
+			    <td>Light</td>
+			    <td>181</td>
+			    <td>35</td>
+			  </tr>
+			</table>
+			</div>
+			<div class="column">
+			    <img src="assets/images/sensor_access_site_rank_histogram.png" style="width:80%">
+			</div>
+		</div>	
+	
+	
+	<div id="sending-sensor-data" class="page-header">
+		<h4>Scripts send sensor data to remote servers</h4>
+	</div>
+		<p>
+		Our investigation revealed that scripts are sending raw sensor data to remote servers. We analyzed HTTP request headers and POST request bodies obtained through OpenWPM’s instrumentation to identify the presence of sensor values we spoofed. We found several domains to access and send raw sensor data to remote servers either in <em>clear text</em> or in <em>base64</em> encoded form.
+		</p>
+		<div class="col-md-7">
+		<table class="table table-striped table-bordered">
+		  <tr>
+		    <th>Domain (PS+1)</th>
+		    <th>Sensors&#42;</th>
+		    <th>Encoding</th>
+			<th>Num. of sites</th>
+			<th>Top site</th>
+		  </tr>
+		  <tr>
+		    <td><em>b2c.com</em></td>
+		    <td>A, O, P, L</td>
+		    <td>base64</td>
+			<td>53</td>
+			<td>reuters.com</td>
+		  </tr>
+		  <tr>
+		    <td><em>perimeterx.net</em></td>
+		    <td>A</td>
+		    <td>base64</td>
+			<td>45</td>
+			<td>zillow.com</td>
+		  </tr>
+		  <tr>
+		    <td><em>wayfair.com</em></td>
+		    <td>A</td>
+		    <td>base64</td>
+			<td>7</td>
+			<td>wayfair.com</td>
+		  </tr>
+		  <tr>
+		    <td><em>moatads.com</em></td>
+		    <td>O</td>
+		    <td>raw</td>
+			<td>5</td>
+			<td>stuff.co.nz</td>
+		  </tr>
+		  <tr>
+		    <td><em>queit.in</em></td>
+		    <td>A, O</td>
+		    <td>raw</td>
+			<td>3</td>
+			<td>busbud.com</td>
+		  </tr>
+		</table>
+		<p>&#42; 'A': accelerometer, 'O': orientation, 'P': proximity, 'L': light</p>
+		</div>
+		
+	
+	<div id="sensor-use-case" class="page-header">
+		<h4>Sensor-accessing scripts often involve in performing some combination of fingerprinting</h4>
+	</div>
+	
+		<p>By clustering scripts based on features extracted from JavaScript instrumentation data, we find a significant disparity between the intended use cases of sensors (as drafted by the W3C) and real-world uses. Sensor data are commonly used for tracking and analytics, verifying ad impressions, and distinguishing real devices from bots. We also found a significant overlap between the fingerprinting scripts and the scripts accessing sensor APIs, indicating that sensor data is used for tracking purposes. For example, we found that 63% of the scripts that access motion sensors also perform canvas fingerprinting.</p>
+		<div class="col-md-12">
+		<table class="table table-striped table-bordered">
+		  <tr>
+		    <th>Use case</th>
+		    <th>% of JS</th>
+		    <th>Num. of sites</th>
+			<th>Prominence</th>
+		  </tr>
+		  <tr>
+		    <td>Use sensor data to add entropy to random numbers</td>
+		    <td>0.4%</td>
+		    <td>4</td>
+			<td>0.0001</td>
+		  </tr>
+		  <tr>
+		    <td>Checks what HTML5 features are offered</td>
+		    <td>11.2%</td>
+		    <td>114</td>
+			<td>0.0185</td>
+		  </tr>
+		  <tr>
+		    <td>Differentiating bots from real devices</td>
+		    <td>17.7%</td>
+		    <td>413</td>
+			<td>0.0464</td>
+		  </tr>
+		  <tr>
+		    <td>Parallax engine that reacts to orientation sensors</td>
+		    <td>3.4%</td>
+		    <td>35</td>
+			<td>0.0037</td>
+		  </tr>
+		  <tr>
+		    <td>Automatically resize contents in page or iframe</td>
+		    <td>3.2%</td>
+		    <td>103</td>
+			<td>0.0045</td>
+		  </tr>
+		  <tr>
+		    <td>Reacting to orientation, tilt, shake </td>
+		    <td>6.7%</td>
+		    <td>533</td>
+			<td>0.3821</td>
+		  </tr>
+		  <tr>
+		    <td>Tracking, analytics, fingerprinting and audience recognition</td>
+		    <td>36.8%</td>
+		    <td>1198</td>
+			<td>0.1289</td>
+		  </tr>
+		  <tr>
+		    <td>Scripts clustered as noisy</td>
+		    <td>20.6%</td>
+		    <td>1804</td>
+			<td>0.1773</td>
+		  </tr>
+		</table>
+		</div>
+		
+		
+			
+			
+	<div id="efficacy-of-antitrackers" class="page-header">
+		<h4>Existing ad blocking and tracking protection lists are inefficient</h4>
+	</div>
+		<p>
+		We measure the rate of blocking by three popular tracking protection lists: EasyList, EasyPrivacy, and Disconnect. In general, we see that a significant portion of scripts that access sensors are missed by the popular blacklists, which is in line with the previous research on tracking protection lists. We found that these lists only block 2.5–3.3% of the scripts overall.
+		</p>
+		<div class="col-md-7">
+		<table class="table table-striped table-bordered">
+		  <tr>
+		    <th>Sensor</th>
+		    <th>Disconnect blocked</th>
+		    <th>EasyList blocked</th>
+			<th>EasyPrivacy blocked</th>
+		  </tr>
+		  <tr>
+		    <td>Motion</td>
+		    <td>1.8%</td>
+			<td>1.8%</td>
+		    <td>2.9%</td>
+		  </tr>
+		  <tr>
+		    <td>Orientation</td>
+		    <td>3.6%</td>
+			<td>3.1%</td>
+		    <td>3.1%</td>
+		  </tr>
+		  <tr>
+		    <td>Proximity</td>
+		    <td>6.0%</td>
+			<td>2.0%</td>
+		    <td>4.0%</td>
+		  </tr>
+		  <tr>
+		    <td>Light</td>
+		    <td>2.9%</td>
+			<td>2.9%</td>
+		    <td>8.6%</td>
+		  </tr>
+		  <tr>
+		    <td>Any sensor</td>
+		    <td>2.9%</td>
+			<td>2.5%</td>
+		    <td>3.3%</td>
+		  </tr>
+		</table>
+		</div>
+		
+	<div id="behavior-of-browsers" class="page-header">
+		<h4>Even privacy-oriented browsers allow access from insecure origins and cross-origin iframes</h4>
+	</div>
+		<p>
+		Our investigation of sensor access behavior for nine popular browsers revealed that browsers, including more privacy-oriented ones such as Firefox Focus and Brave, fail to follow the W3C recommendation of disallowing access from insecure origins and cross-origin iframes. We have reported these issues to the specific browser vendors.	
+		</p>
+		<div class="col-md-10">
+		<table class="table table-striped table-bordered">
+		  <tr>
+		    <th>Browser</th>
+		    <th>Chrome</th>
+		    <th>Edge&nbsp;&nbsp;&nbsp;</th>
+			<th>Safari&nbsp;&nbsp;</th>
+			<th>Firefox</th>
+			<th>Brave&nbsp;&nbsp;</th>
+			<th>Focus&nbsp;&nbsp;</th>
+			<th>Dolphin</th>
+			<th>Opera Mini</th>
+			<th>UC Browser</th>
+		  </tr>
+		  <tr>
+		    <td>Orientation&#42;</td>
+		    <td>(&#10003;, &#10003;)</td>
+			<td>(&#10003;, &#10003;)</td>
+		    <td>(&#10003;, &#10007;)</td>
+			<td>(&#10003;, &#10007;)</td>
+			<td>(&#10003;, &#10003;)</td>
+			<td>(&#10003;, &#10003;)</td>
+			<td>(&#10003;, &#10003;)</td>
+			<td>(&#10003;, &#10003;)</td>
+			<td>(&#10003;, &#10003;)</td>
+		  </tr>
+		  <tr>
+		    <td>Motion&#42;</td>
+		    <td>(&#10003;, &#10003;)</td>
+			<td>(&#10003;, &#10003;)</td>
+		    <td>(&#10003;, &#10007;)</td>
+			<td>(&#10003;, &#10007;)</td>
+			<td>(&#10003;, &#10007;)</td>
+			<td>(&#10003;, &#10003;)</td>
+			<td>(&#10003;, &#10003;)</td>
+			<td>(&#10003;, &#10003;)</td>
+			<td>(&#10003;, &#10003;)</td>
+		  </tr>
+		  <tr>
+		    <td>Proximity&#42;</td>
+		    <td>(&#10007;, &#10007;)</td>
+			<td>(&#10007;, &#10007;)</td>
+		    <td>(&#10007;, &#10007;)</td>
+			<td>(&#10003;, &#10007;)</td>
+			<td>(&#10007;, &#10007;)</td>
+			<td>(&#10007;, &#10007;)</td>
+			<td>(&#10007;, &#10007;)</td>
+			<td>(&#10007;, &#10007;)</td>
+			<td>(&#10007;, &#10007;)</td>
+		  </tr>
+		  <tr>
+		    <td>Light&#42;</td>
+  		    <td>(&#10007;, &#10007;)</td>
+  			<td>(&#10007;, &#10007;)</td>
+  		    <td>(&#10007;, &#10007;)</td>
+  			<td>(&#10003;, &#10007;)</td>
+  			<td>(&#10007;, &#10007;)</td>
+  			<td>(&#10007;, &#10007;)</td>
+  			<td>(&#10007;, &#10007;)</td>
+  			<td>(&#10007;, &#10007;)</td>
+  			<td>(&#10007;, &#10007;)</td>
+  		  </tr>
+		  </tr>
+		</table>
+		<p>&#42; Each tuple representing (third-party, iframe) access right</p>
+		</div>
+			
+			
+	<div id="interesting-script" class="page-header">
+		<h2>Sensor-accessing domains</h2>
+	</div>
+	
+		<p>In a crawl conducted during May 2018, these domains were found to access various sensors when loaded on the homepage of different Alexa top 100K sites.<br></p>
+
+
+		<div id="table-holder"></div>
+	
+	
     </main>
 
-    <script src="https://sensor-js.xyz/assets/js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="https://sensor-js.xyz/assets/js/popper.min.js"></script>
-    <script src="https://sensor-js.xyz/assets/js/bootstrap.min.js"></script>
+    
+    
+
+	
+    
+	
+
   </body>
 </html>
