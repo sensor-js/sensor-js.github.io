@@ -59,7 +59,7 @@
         if (columns.length < 4) { return; }
 				// start a table row
 				html += "<tr>";
-				html += "<td>" + columns[0] + "</td>";
+				html += "<td><i>" + columns[0] + "</i></td>";
 				html += "<td>" + columns[1] + "</td>";
 				html += "<td>" + columns[2] + "</td>";
 				html += "<td>" + columns[3] + "</td>";
@@ -159,7 +159,7 @@
 	</div>
 
 		<p>
-		From our crawl results we found that sensor APIs were accessed on 3695 of the 100K websites by scripts served from 603 distinct domains. Orientation and motion sensors are by far the most frequently accessed, on 2653 and 2036 sites respectively. Light and proximity sensors, which  <strike>are</strike>were only supported by Firefox, are accessed on fewer than 200 sites each.<br>
+		From our crawl results we found that sensor APIs were accessed on 3695 of the 100K websites by scripts served from 603 distinct domains. Orientation and motion sensors are by far the most frequently accessed, on 2653 and 2036 sites respectively. Light and proximity sensors, which  <strike>are</strike> were only supported by Firefox, are accessed on fewer than 200 sites each.<br>
 		</p>
 		<div class="row" align="center">
 			<div class="column">
@@ -215,41 +215,40 @@
 		  </tr>
 		  <tr>
 		    <td><em>b2c.com</em></td>
-		    <td>A, O, P, L</td>
+		    <td>Orientation, Motion, Proximity, Light</td>
 		    <td>base64</td>
 			<td>53</td>
 			<td>reuters.com</td>
 		  </tr>
 		  <tr>
 		    <td><em>perimeterx.net</em></td>
-		    <td>A</td>
+		    <td>Motion</td>
 		    <td>base64</td>
 			<td>45</td>
 			<td>zillow.com</td>
 		  </tr>
 		  <tr>
 		    <td><em>wayfair.com</em></td>
-		    <td>A</td>
+		    <td>Motion</td>
 		    <td>base64</td>
 			<td>7</td>
 			<td>wayfair.com</td>
 		  </tr>
 		  <tr>
 		    <td><em>moatads.com</em></td>
-		    <td>O</td>
+		    <td>Orientation</td>
 		    <td>raw</td>
 			<td>5</td>
 			<td>stuff.co.nz</td>
 		  </tr>
 		  <tr>
 		    <td><em>queit.in</em></td>
-		    <td>A, O</td>
+		    <td>Motion, Orientation</td>
 		    <td>raw</td>
 			<td>3</td>
 			<td>busbud.com</td>
 		  </tr>
 		</table>
-		<p>&#42; 'A': accelerometer, 'O': orientation, 'P': proximity, 'L': light</p>
 		</div>
 
 
