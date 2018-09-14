@@ -41,13 +41,11 @@
    </script>
 	 <script>
     // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
-		// TODO: uncomment the sensor-js.xyz URL
-    //$.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain-feats.csv', function(data) {
-    $.get('https://raw.githubusercontent.com/sensor-js/sensor-js.github.io/master/assets/sensor-accessing-script-domain-feats.csv', function(data) {
+		$.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain-feats.csv', function(data) {
 
 			// start the table
 			var html = '<table id ="sensor_js_urls" class="data-table table table-striped table-bordered">';
-      html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Prominence</th></tr></thead>';
+      html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Fingerprinting</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Prominence</th></tr></thead>';
 			// split into lines
 			var rows = data.split("\n");
 
@@ -56,14 +54,15 @@
 			rows.forEach( function getvalues(ourrow) {
 				// split line into columns
 				var columns = ourrow.split("\t");
-        if (columns.length < 4) { return; }
+        if (columns.length != 6) { return; }
 				// start a table row
 				html += "<tr>";
-				html += "<td>" + columns[0] + "</td>";
+				html += "<td><i>" + columns[0] + "</i></td>";
 				html += "<td>" + columns[1] + "</td>";
 				html += "<td>" + columns[2] + "</td>";
 				html += "<td>" + columns[3] + "</td>";
         html += "<td>" + columns[4] + "</td>";
+        html += "<td>" + columns[5] + "</td>";
 
 				// close row
 				html += "</tr>";
@@ -78,7 +77,7 @@
 			$('#sensor_js_urls').dataTable( {
 		                "iDisplayLength": 25,
 		                "sDom": '<lfip<t>>',
-                    "aaSorting": [[3, 'desc']],
+                    "aaSorting": [[4, 'desc']],
 		            });
 		});
 
@@ -93,17 +92,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#code">OpenWPM-Mobile <span class="sr-only">(current)</span></a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="#findings">Findings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#sensor-js-table">List of sensor accessing scripts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#code">Source code</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#data">Data</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#sensor-js-table">List of sensor accessing scripts</a>
+            <a class="nav-link" href="#errata">Errata</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
@@ -118,7 +120,7 @@
       <div class="jumbotron">
         <h1>The Web's Sixth Sense:</h1><h2>A Study of Scripts Accessing Smartphone Sensors</h2>
         <p class="lead">Companion website for the upcoming CCS'18 paper on ecosystem of scripts accessing mobile sensors.</p>
-        <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">Read the paper &raquo;</a>
+        <a class="btn btn-lg btn-primary" href="ccs-18-a-study-of-scripts-accessing-smartphone-sensors.pdf" role="button">Read the paper &raquo;</a>
       </div>
 
       <div id="about" class="page-header">
@@ -132,21 +134,15 @@
     <sup>3</sup> University of Illinois at Urbana-Champaign <em>nikita@illinois.edu</em><br />
     <sup>4</sup> Northeastern University <em>a.pradeep@northeastern.edu</em>
       </p>
-      <p><b>Reference:</b> A. Das, G. Acar, N. Borisov, A. Pradeep.
-      The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors.
-      In Proceedings of CCS 2018, Oct. 2018. (Forthcoming)
-	  </p>
-
-    <div id="code" class="page-header">
-        <h2>OpenWPM-Mobile</h2>
-      </div>
-         The code for OpenWPM-Mobile, a mobile version of the <a href="https://github.com/citp/OpenWPM">OpenWPM</a> can be found at <a href="https://github.com/sensor-js/OpenWPM_mobile">GitHub</a>.
-
-
-    <div id="data" class="page-header">
-        <h2>Data</h2>
-      </div>
-         The data collected during the study can be downloaded at <a href="https://databank.illinois.edu/datasets">Illinois data bank</a>.
+      <p><b>Reference:</b></p>
+    <pre>
+    @inproceedings{sensor-js-2018,
+        author    = "Anupam Das and Gunes Acar and Nikita Borisov and Amogh Pradeep",
+        title     = "{The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors}",
+        booktitle = {Proceedings of ACM CCS 2018},
+        year      = "2018",
+    }
+      </pre>
 
 
 	<div id="findings" class="page-header">
@@ -159,7 +155,7 @@
 	</div>
 
 		<p>
-		From our crawl results we found that sensor APIs were accessed on 3695 of the 100K websites by scripts served from 603 distinct domains. Orientation and motion sensors are by far the most frequently accessed, on 2653 and 2036 sites respectively. Light and proximity sensors, which  <strike>are</strike>were only supported by Firefox, are accessed on fewer than 200 sites each.<br>
+		From our crawl results we found that sensor APIs were accessed on 3695 of the 100K websites by scripts served from 603 distinct domains. Orientation and motion sensors are by far the most frequently accessed, on 2653 and 2036 sites respectively. Light and proximity sensors, which  <strike>are</strike> were only supported by Firefox, are accessed on fewer than 200 sites each.<br>
 		</p>
 		<div class="row" align="center">
 			<div class="column">
@@ -215,46 +211,45 @@
 		  </tr>
 		  <tr>
 		    <td><em>b2c.com</em></td>
-		    <td>A, O, P, L</td>
+		    <td>Orientation, Motion, Proximity, Light</td>
 		    <td>base64</td>
 			<td>53</td>
 			<td>reuters.com</td>
 		  </tr>
 		  <tr>
 		    <td><em>perimeterx.net</em></td>
-		    <td>A</td>
+		    <td>Motion</td>
 		    <td>base64</td>
 			<td>45</td>
 			<td>zillow.com</td>
 		  </tr>
 		  <tr>
 		    <td><em>wayfair.com</em></td>
-		    <td>A</td>
+		    <td>Motion</td>
 		    <td>base64</td>
 			<td>7</td>
 			<td>wayfair.com</td>
 		  </tr>
 		  <tr>
 		    <td><em>moatads.com</em></td>
-		    <td>O</td>
+		    <td>Orientation</td>
 		    <td>raw</td>
 			<td>5</td>
 			<td>stuff.co.nz</td>
 		  </tr>
 		  <tr>
 		    <td><em>queit.in</em></td>
-		    <td>A, O</td>
+		    <td>Motion, Orientation</td>
 		    <td>raw</td>
 			<td>3</td>
 			<td>busbud.com</td>
 		  </tr>
 		</table>
-		<p>&#42; 'A': accelerometer, 'O': orientation, 'P': proximity, 'L': light</p>
 		</div>
 
 
 	<div id="sensor-use-case" class="page-header">
-		<h4>Sensor-accessing scripts often involve in performing some combination of fingerprinting</h4>
+		<h4>Sensor-accessing scripts often engage in browser fingerprinting</h4>
 	</div>
 
 		<p>By clustering scripts based on features extracted from JavaScript instrumentation data, we find a significant disparity between the intended use cases of sensors (as drafted by the W3C) and real-world uses. Sensor data are commonly used for tracking and analytics, verifying ad impressions, and distinguishing real devices from bots. We also found a significant overlap between the fingerprinting scripts and the scripts accessing sensor APIs, indicating that sensor data is used for tracking purposes. For example, we found that 63% of the scripts that access motion sensors also engage in browser fingerprinting.</p>
@@ -367,13 +362,32 @@
 
 
 	<div id="sensor-js-table" class="page-header">
-		<h2>Sensor-accessing domains</h2>
+		<h2>Sensor-accessing scripts</h2>
 	</div>
 
-		<p>In a crawl conducted during May 2018, scripts from the following domains were found to access various sensors when loaded on the homepage of different Alexa top 100K sites.<br></p>
+		<p>Scripts from the following domains were found to access one or more sensors APIs.
+The data was collected in May 2018 by crawling homepages of Alexa top 100K sites.<br></p>
 
 
 		<div id="table-holder"></div>
+
+    <div id="code" class="page-header">
+        <h2>OpenWPM-Mobile</h2>
+      </div>
+         The code for OpenWPM-Mobile, a mobile version of the <a href="https://github.com/citp/OpenWPM">OpenWPM</a> can be found at <a href="https://github.com/sensor-js/OpenWPM_mobile">GitHub</a>.
+
+
+    <div id="data" class="page-header">
+        <h2>Data</h2>
+      </div>
+         The data collected during the study can be downloaded at <a href="https://databank.illinois.edu/datasets">Illinois data bank</a>.
+
+
+    <div id="errata" class="page-header">
+        <h2>Errata</h2>
+      </div>
+         In p.2, <i>"63% of the scripts that access motion sensors also perform canvas fingerprinting"</i> should have been
+          <i>"63% of the scripts that access motion sensors also perform browser fingerprinting"</i>.
 
 
    <div id="contact" class="page-header">
