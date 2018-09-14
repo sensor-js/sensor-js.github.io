@@ -45,7 +45,7 @@
 
 			// start the table
 			var html = '<table id ="sensor_js_urls" class="data-table table table-striped table-bordered">';
-      html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Prominence</th></tr></thead>';
+      html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Fingerprinting</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Prominence</th></tr></thead>';
 			// split into lines
 			var rows = data.split("\n");
 
@@ -54,7 +54,7 @@
 			rows.forEach( function getvalues(ourrow) {
 				// split line into columns
 				var columns = ourrow.split("\t");
-        if (columns.length < 4) { return; }
+        if (columns.length != 6) { return; }
 				// start a table row
 				html += "<tr>";
 				html += "<td><i>" + columns[0] + "</i></td>";
@@ -62,6 +62,7 @@
 				html += "<td>" + columns[2] + "</td>";
 				html += "<td>" + columns[3] + "</td>";
         html += "<td>" + columns[4] + "</td>";
+        html += "<td>" + columns[5] + "</td>";
 
 				// close row
 				html += "</tr>";
@@ -76,7 +77,7 @@
 			$('#sensor_js_urls').dataTable( {
 		                "iDisplayLength": 25,
 		                "sDom": '<lfip<t>>',
-                    "aaSorting": [[3, 'desc']],
+                    "aaSorting": [[4, 'desc']],
 		            });
 		});
 
@@ -119,7 +120,7 @@
       <div class="jumbotron">
         <h1>The Web's Sixth Sense:</h1><h2>A Study of Scripts Accessing Smartphone Sensors</h2>
         <p class="lead">Companion website for the upcoming CCS'18 paper on ecosystem of scripts accessing mobile sensors.</p>
-        <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">Read the paper &raquo;</a>
+        <a class="btn btn-lg btn-primary" href="ccs-18-a-study-of-scripts-accessing-smartphone-sensors.pdf" role="button">Read the paper &raquo;</a>
       </div>
 
       <div id="about" class="page-header">
@@ -365,7 +366,7 @@
 	</div>
 
 		<p>Scripts from the following domains were found to access one or more sensors APIs.
-The data were collected in May 2018 by crawling homepages of Alexa top 100K sites.<br></p>
+The data was collected in May 2018 by crawling homepages of Alexa top 100K sites.<br></p>
 
 
 		<div id="table-holder"></div>
