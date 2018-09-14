@@ -41,9 +41,7 @@
    </script>
 	 <script>
     // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
-		// TODO: uncomment the sensor-js.xyz URL
-    //$.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain-feats.csv', function(data) {
-    $.get('https://raw.githubusercontent.com/sensor-js/sensor-js.github.io/master/assets/sensor-accessing-script-domain-feats.csv', function(data) {
+		$.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain-feats.csv', function(data) {
 
 			// start the table
 			var html = '<table id ="sensor_js_urls" class="data-table table table-striped table-bordered">';
@@ -369,7 +367,8 @@
 		<h2>Sensor-accessing domains</h2>
 	</div>
 
-		<p>In a crawl conducted during May 2018, scripts from the following domains were found to access various sensors when loaded on the homepage of different Alexa top 100K sites.<br></p>
+		<p>Scripts from the following domains were found to access one or more sensors APIs.
+The data were collected in May 2018 by crawling homepages of Alexa top 100K sites.<br></p>
 
 
 		<div id="table-holder"></div>
