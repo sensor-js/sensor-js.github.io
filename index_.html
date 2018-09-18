@@ -41,12 +41,12 @@
    </script>
 	 <script>
     // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
-		$.get('https://raw.githubusercontent.com/sensor-js/sensor-js.github.io/master/assets/sensor-accessing-script-domain-feats.csv', function(data) {
+		$.get('https://raw.githubusercontent.com/sensor-js/sensor-js.github.io/master/assets/sensor-accessing-script-domain-feats-usecase.csv', function(data) {
     //$.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain-feats.csv', function(data) {
 
 			// start the table
 			var html = '<table id ="sensor_js_urls" class="data-table table table-striped table-bordered">';
-      html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Fingerprinting</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Prominence</th></tr></thead>';
+      html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Fingerprinting</th><th>Use cases</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Prominence</th></tr></thead>';
 			// split into lines
 			var rows = data.split("\n");
 
@@ -55,15 +55,16 @@
 			rows.forEach( function getvalues(ourrow) {
 				// split line into columns
 				var columns = ourrow.split("\t");
-        if (columns.length != 6) { return; }
+        if (columns.length != 7) { return; }
 				// start a table row
 				html += "<tr>";
 				html += "<td><i>" + columns[0] + "</i></td>";
 				html += "<td>" + columns[1] + "</td>";
 				html += "<td>" + columns[2] + "</td>";
+				html += "<td>" + columns[6] + "</td>";
 				html += "<td>" + columns[3] + "</td>";
-        html += "<td>" + columns[4] + "</td>";
-        html += "<td>" + columns[5] + "</td>";
+        		html += "<td>" + columns[4] + "</td>";
+        		html += "<td>" + columns[5] + "</td>";
 
 				// close row
 				html += "</tr>";
