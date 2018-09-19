@@ -8,10 +8,10 @@
     <!-- <link rel="icon" href="../../../../favicon.ico"> -->
 
     <title>The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors</title>
-    <link href="https://sensor-js.xyz/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- CSS to customize styles -->
-    <link href="https://sensor-js.xyz/assets/css/custom.css" rel="stylesheet">
+    <link href="/assets/css/custom.css" rel="stylesheet">
 
 	<script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery-1.9.1.min.js"></script>
 	 <link rel="stylesheet" href="https://sensor-js.xyz/assets/css/jquery-ui.css" />
@@ -146,14 +146,15 @@
 	<div id="findings" class="page-header">
 		<h2>Findings</h2>
 	</div>
-	<br>
+
+  <p>All the findings below are based on a web crawl of the Alexa top 100K websites carried out in May 2018.</p>
 
 	<div id="prevalence-script" class="page-header">
 		<h4>Sensor-accessing scripts are prevalent</h4>
 	</div>
 
 		<p>
-		From our crawl results we found that sensor APIs were accessed on 3695 of the 100K websites by scripts served from 603 distinct domains. Orientation and motion sensors are by far the most frequently accessed, on 2653 and 2036 sites respectively. Light and proximity sensors, which  <strike>are</strike> were only supported by Firefox, are accessed on fewer than 200 sites each.<br>
+		From our crawl results we found that sensor APIs were accessed on 3695 of the 100K websites by scripts served from 603 distinct domains. Orientation and motion sensors are by far the most frequently accessed, on 2653 and 2036 sites respectively. Light and proximity sensors, which  were only supported by Firefox<span class="refnum">[1]</span><span class="refbody">Firefox deprecated these sensor APIs; starting with Firefox 60, released in May 2018, they are disabled by default</span>, are accessed on fewer than 200 sites each.<br>
 		</p>
 		<div class="row" align="center">
 			<div class="column">
@@ -402,7 +403,20 @@ The data was collected in May 2018 by crawling homepages of Alexa top 100K sites
 
     </main>
 
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>
+      jQuery.noConflict();
+      jQuery(function() {
+        jQuery(".refbody").hide();
+        jQuery(".refnum").click(function(event) {
+          jQuery(this.nextSibling).toggle();
+          event.stopPropagation();
+        });
+        jQuery("body").click(function(event) {
+          jQuery(".refbody").hide();
+        });
+      });
+    </script>
 
 
 
