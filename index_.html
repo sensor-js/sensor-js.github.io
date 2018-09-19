@@ -41,12 +41,12 @@
    </script>
 	 <script>
     // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
-		$.get('https://raw.githubusercontent.com/sensor-js/sensor-js.github.io/master/assets/sensor-accessing-script-domain-feats.csv', function(data) {
+		$.get('https://raw.githubusercontent.com/sensor-js/sensor-js.github.io/master/assets/sensor-accessing-script-domain-feats-usecase.csv', function(data) {
     //$.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain-feats.csv', function(data) {
 
 			// start the table
 			var html = '<table id ="sensor_js_urls" class="data-table table table-striped table-bordered">';
-      html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Fingerprinting</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Prominence</th></tr></thead>';
+      html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Fingerprinting</th><th>Use cases</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Prominence</th></tr></thead>';
 			// split into lines
 			var rows = data.split("\n");
 
@@ -55,15 +55,16 @@
 			rows.forEach( function getvalues(ourrow) {
 				// split line into columns
 				var columns = ourrow.split("\t");
-        if (columns.length != 6) { return; }
+        if (columns.length != 7) { return; }
 				// start a table row
 				html += "<tr>";
 				html += "<td><i>" + columns[0] + "</i></td>";
 				html += "<td>" + columns[1] + "</td>";
 				html += "<td>" + columns[2] + "</td>";
+				html += "<td>" + columns[6] + "</td>";
 				html += "<td>" + columns[3] + "</td>";
-        html += "<td>" + columns[4] + "</td>";
-        html += "<td>" + columns[5] + "</td>";
+        		html += "<td>" + columns[4] + "</td>";
+        		html += "<td>" + columns[5] + "</td>";
 
 				// close row
 				html += "</tr>";
@@ -78,7 +79,7 @@
 			$('#sensor_js_urls').dataTable( {
 		                "iDisplayLength": 25,
 		                "sDom": '<lfip<t>>',
-                    "aaSorting": [[4, 'desc']],
+                    "aaSorting": [[5, 'desc']],
 		            });
 		});
 
@@ -121,7 +122,7 @@
       <div class="jumbotron">
         <h1>The Web's Sixth Sense:</h1><h2>A Study of Scripts Accessing Smartphone Sensors</h2>
         <p class="lead">Companion website for the upcoming CCS'18 paper on ecosystem of scripts accessing mobile sensors.</p>
-        <a class="btn btn-lg btn-primary" href="ccs-18-a-study-of-scripts-accessing-smartphone-sensors.pdf" role="button">Read the paper &raquo;</a>
+        <a class="btn btn-lg btn-warning" href="ccs-18-a-study-of-scripts-accessing-smartphone-sensors.pdf" role="button">Read the paper &raquo;</a>
       </div>
 
       <div id="about" class="page-header">
