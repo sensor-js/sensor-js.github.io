@@ -24,3 +24,7 @@ div.page-header{
     clear: both;
     display: table;
 }
+
+html {
+  scroll-behavior: smooth;
+}

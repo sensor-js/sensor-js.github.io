@@ -12,7 +12,7 @@
 
     <!-- CSS to customize styles -->
     <link href="/assets/css/custom.css" rel="stylesheet">
-	
+
 	<script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/sorttable.js"></script>
 	<style>
 		table.sortable thead {
@@ -20,7 +20,7 @@
 		    font-weight: bold;
 		    cursor: default;
 		}
-		
+
 	</style>
 	<script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery-1.9.1.min.js"></script>
 	 <link rel="stylesheet" href="https://sensor-js.xyz/assets/css/jquery-ui.css" />
@@ -70,7 +70,7 @@
 				html += "<td><i>" + columns[0] + "</i></td>";
 				html += "<td>" + columns[1] + "</td>";
 				html += "<td>" + columns[2] + "</td>";
-				
+
 				var usecases = columns[6].split(",");
 				var i;
 				var text="";
@@ -434,6 +434,14 @@ The data was collected in May 2018 by crawling homepages of Alexa top 100K sites
       $(function () {
         $('[data-toggle="tooltip"]').tooltip()
       })
+      // Modified from https://stackoverflow.com/a/49331692
+      var divId;
+      $('.nav-link').click(function(){
+        divId = $(this).attr('href');
+         $('html, body').animate({
+          scrollTop: $(divId).offset().top - 65
+        }, 100);
+      });
     </script>
 
   </body>
