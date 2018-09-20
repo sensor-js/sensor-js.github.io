@@ -12,6 +12,17 @@
 
     <!-- CSS to customize styles -->
     <link href="/assets/css/custom.css" rel="stylesheet">
+	
+	<script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/sorttable.js"></script>
+	<style>
+		/* Sortable tables */
+		table.sortable thead {
+		    background-color:#eee;
+		    color:#666666;
+		    font-weight: bold;
+		    cursor: default;
+		}
+	</style>
 
 	<script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery-1.9.1.min.js"></script>
 	 <link rel="stylesheet" href="https://sensor-js.xyz/assets/css/jquery-ui.css" />
@@ -253,7 +264,7 @@
 
 		<p>By clustering scripts based on features extracted from JavaScript instrumentation data, we find a significant disparity between the intended use cases of sensors (as drafted by the W3C) and real-world uses. Sensor data are commonly used for tracking and analytics, verifying ad impressions, and distinguishing real devices from bots. We also found a significant overlap between the fingerprinting scripts and the scripts accessing sensor APIs, indicating that sensor data is used for tracking purposes. For example, we found that 63% of the scripts that access motion sensors also engage in browser fingerprinting.</p>
 		<div class="col-md-12">
-		<table class="table table-striped table-bordered">
+		<table class="sortable table table-striped table-bordered">
 		  <tr>
 		    <th>Use case</th>
 		    <th>% of JS</th>
