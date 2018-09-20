@@ -70,7 +70,17 @@
 				html += "<td><i>" + columns[0] + "</i></td>";
 				html += "<td>" + columns[1] + "</td>";
 				html += "<td>" + columns[2] + "</td>";
-				html += "<td>" + columns[6] + "</td>";
+				
+				var usecases = columns[6].split(",");
+				var i;
+				var text="";
+				for (i = 0; i < usecases.length; i++) {
+				    text += "<a href=\"#"+ usecases[i] + "\">"+ usecases[i] +"</a>";
+					if (i<usecases.length-1){
+						text += ", ";
+					}
+				}
+				html += "<td>" + text + "</td>";
 				html += "<td>" + columns[3] + "</td>";
         		html += "<td>" + columns[4] + "</td>";
         		html += "<td>" + columns[5] + "</td>";
@@ -264,54 +274,63 @@
 		<div class="col-md-12">
 		<table class="sortable table table-striped table-bordered">
 		  <tr>
+			<th>ID</th>
 		    <th>Use case</th>
 		    <th>% of JS</th>
 		    <th>Num. of sites</th>
 			<th>Prominence</th>
 		  </tr>
 		  <tr>
+			<td id="1">1</td>
 		    <td>Reacting to orientation, tilt, shake </td>
 		    <td>6.7%</td>
 		    <td>533</td>
 			<td>0.3821</td>
 		  </tr>
 		  <tr>
+			<td id="2">2</td>
 		    <td>Scripts clustered as noisy</td>
 		    <td>20.6%</td>
 		    <td>1804</td>
 			<td>0.1773</td>
 		  </tr>
 		  <tr>
+			<td id="3">3</td>
 		    <td>Tracking, analytics, fingerprinting and audience recognition</td>
 		    <td>36.8%</td>
 		    <td>1198</td>
 			<td>0.1289</td>
 		  </tr>
 		  <tr>
+			<td id="4">4</td>
 		    <td>Differentiating bots from real devices</td>
 		    <td>17.7%</td>
 		    <td>413</td>
 			<td>0.0464</td>
 		  </tr>
 		  <tr>
+			<td id="5">5</td>
 		    <td>Checks what HTML5 features are offered</td>
 		    <td>11.2%</td>
 		    <td>114</td>
 			<td>0.0185</td>
 		  </tr>
 		  <tr>
+			<td id="6">6</td>
 		    <td>Automatically resize contents in page or iframe</td>
 		    <td>3.2%</td>
 		    <td>103</td>
 			<td>0.0045</td>
 		  </tr>
 		  <tr>
+			<td id="7">7</td>
 		    <td>Parallax engine that reacts to orientation sensors</td>
 		    <td>3.4%</td>
 		    <td>35</td>
 			<td>0.0037</td>
 		  </tr>
 		  <tr>
+			<td id="8">8</td>
 		    <td>Use sensor data to add entropy to random numbers</td>
 		    <td>0.4%</td>
 		    <td>4</td>
