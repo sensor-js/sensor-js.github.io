@@ -173,7 +173,7 @@
 	</div>
 
 		<p>
-		From our crawl results we found that sensor APIs were accessed on 3695 of the 100K websites by scripts served from 603 distinct domains. Orientation and motion sensors are by far the most frequently accessed, on 2653 and 2036 sites respectively. Light and proximity sensors, which  were only supported by Firefox<span class="refnum">[1]</span><span class="refbody">Firefox deprecated these sensor APIs; starting with Firefox 60, released in May 2018, they are disabled by default</span>, are accessed on fewer than 200 sites each.<br>
+		From our crawl results we found that sensor APIs were accessed on 3695 of the 100K websites by scripts served from 603 distinct domains. Orientation and motion sensors are by far the most frequently accessed, on 2653 and 2036 sites respectively. Light and proximity sensors, which  were only supported by Firefox<a href="#" data-toggle="tooltip" title="Firefox deprecated these sensor APIs; starting with Firefox 60, released in May 2018, they are disabled by default"><sup>[1]</sup></a>, are accessed on fewer than 200 sites each.<br>
 		</p>
 		<div class="row" align="center">
 			<div class="column">
@@ -430,25 +430,11 @@ The data was collected in May 2018 by crawling homepages of Alexa top 100K sites
 
     </main>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script>
-      jQuery.noConflict();
-      jQuery(function() {
-        jQuery(".refbody").hide();
-        jQuery(".refnum").click(function(event) {
-          jQuery(this.nextSibling).toggle();
-          event.stopPropagation();
-        });
-        jQuery("body").click(function(event) {
-          jQuery(".refbody").hide();
-        });
-      });
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
     </script>
-
-
-
-
-
 
   </body>
 </html>
