@@ -121,7 +121,7 @@
         if (columns.length != 4) { return; }
 				// start a table row
 				html += "<tr>";
-				html += "<td><i>" + columns[0] + "</i></td>";
+				html += "<td><i>" + parseInt(columns[0]) + "</i></td>";
 				html += "<td>" + columns[1] + "</td>";
 				html += "<td>" + columns[2] + "</td>";
 				html += "<td>" + columns[3] + "</td>";
@@ -137,8 +137,7 @@
 
 			$('#sensor_domain_urls').dataTable( {
 		                "iDisplayLength": 25,
-		                "sDom": '<lfip<t>>',
-                    "aaSorting": [[0, 'asc']],
+		                "sDom": '<lfip<t>>'
 		            });
 		});
 
