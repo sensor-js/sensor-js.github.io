@@ -103,6 +103,47 @@
 		});
 
 	</script>
+		
+	 <script>
+    // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
+		$.get('https://raw.githubusercontent.com/sensor-js/sensor-js.github.io/master/assets/domain_sensor_script.csv', function(data) {
+			// start the table
+			var html = '<table id ="sensor_domain_urls" class="data-table table table-striped table-bordered">';
+      	  html += '<thead><tr><th>Rank</th><th>Domain</th><th>Sensors</th><th>Sensor-accessing script domain</th></tr></thead>';
+			// split into lines
+			var rows = data.split("\n");
+
+		  html+='<tbody>'
+			// parse lines
+			rows.forEach( function getvalues(ourrow) {
+				// split line into columns
+				var columns = ourrow.split("\t");
+        if (columns.length != 4) { return; }
+				// start a table row
+				html += "<tr>";
+				html += "<td><i>" + columns[0] + "</i></td>";
+				html += "<td>" + columns[1] + "</td>";
+				html += "<td>" + columns[2] + "</td>";
+				html += "<td>" + columns[3] + "</td>";
+				// close row
+				html += "</tr>";
+			})
+			// close table
+      html += "</tbody>";
+			html += "</table>";
+
+			// insert into div
+			$('#table-holder-domain').append(html);
+
+			$('#sensor_domain_urls').dataTable( {
+		                "iDisplayLength": 25,
+		                "sDom": '<lfip<t>>',
+                    "aaSorting": [[1, 'asc']],
+		            });
+		});
+
+	</script>	
+	
   </head>
   <body>
 
@@ -118,6 +159,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#sensor-js-table">List of sensor accessing scripts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#sensor-domain-table">List of domains acessing sensors</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#code">Source code</a>
@@ -396,6 +440,15 @@ The data was collected in May 2018 by crawling homepages of Alexa top 100K sites
 
 
 		<div id="table-holder"></div>
+		
+	<div id="sensor-domain-table" class="page-header">
+		<h2>Domains where sensors are accessed</h2>
+	</div>
+	
+		<p>Sensors were accessed when the following domains were visited. The data was collected in May 2018 by crawling homepages of Alexa top 100K sites.<br></p>
+		
+		<div id="table-holder-domain"></div>
+		
 
     <div id="code" class="page-header">
         <h2>Source code - OpenWPM-Mobile</h2>
