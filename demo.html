@@ -10,6 +10,9 @@
       #demo-div {color: lightgrey; border-radius: 0.3rem;}
       #demo-div span, #demo-div #num-observed-events {color: black;}
       h1 {margin-top: 0.5rem;}
+      h4 {margin-top: 0.66rem; font-size:1.33rem;}
+      #demo-div li {line-height: 21px;}
+      #demo-div ul {margin-bottom: 0.66rem;}
     </style>
 </head>
 <body>
@@ -24,11 +27,11 @@
 <p>The sensor data shown below does not leave your browser: it is not collected, shared or transmitted. However this may not be true for other websites that you visit. For more information, see the companion page for our study: <a href="https://sensor-js.xyz/">"The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors"</a>.</p>
 
 <div class="p-3 mb-2 bg-secondary" id="demo-div">
-<a id="start_demo" class="btn btn-lg btn-success" href="#demo-div" role="button">Start the demo</a>
+<a id="start_demo" class="btn btn-lg btn-success py-1" href="#" role="button">Start the demo</a>
 <p style="margin-top:1rem;">Num. of datapoints: <span class="badge badge-warning" id="num-observed-events">0</span></p>
 
 
-<h4 style="margin-top:1rem;">Orientation</h4>
+<h4 style="margin-top:0.75rem;">Orientation</h4>
 <ul>
   <li>X-axis (&beta;): <span id="Orientation_b">?</span></li>
   <li>Y-axis (&gamma;): <span id="Orientation_g">?</span></li>
@@ -76,8 +79,9 @@ function handleOrientation(event) {
 }
 
 function incrementEventCount(){
-  let event_count = parseInt(document.getElementById("num-observed-events").innerHTML)
-  document.getElementById("num-observed-events").innerHTML = event_count+1;
+  let counterElement = document.getElementById("num-observed-events")
+  let eventCount = parseInt(counterElement.innerHTML)
+  counterElement.innerHTML = eventCount + 1;
 }
 
 function updateFieldIfNotNull(fieldName, value, precision=10){
@@ -104,18 +108,19 @@ function handleMotion(event) {
 
 let is_running = false;
 let demo_button = document.getElementById("start_demo");
-demo_button.onclick = function() {
+demo_button.onclick = function(e) {
+  e.preventDefault();
   if (is_running){
     window.removeEventListener("devicemotion", handleMotion);
     window.removeEventListener("deviceorientation", handleOrientation);
-    demo_button.innerHTML = "Start the demo";
+    demo_button.innerHTML = "Start demo";
     demo_button.classList.add('btn-success');
     demo_button.classList.remove('btn-danger');
     is_running = false;
   }else{
     window.addEventListener("devicemotion", handleMotion);
     window.addEventListener("deviceorientation", handleOrientation);
-    document.getElementById("start_demo").innerHTML = "Stop the demo";
+    document.getElementById("start_demo").innerHTML = "Stop demo";
     demo_button.classList.remove('btn-success');
     demo_button.classList.add('btn-danger');
     is_running = true;
