@@ -50,7 +50,7 @@
    </script>
 	 <script>
     // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
-		$.get('https://raw.githubusercontent.com/sensor-js/sensor-js.github.io/master/assets/sensor-accessing-script-domain-feats-usecase.csv', function(data) {
+		$.get('/assets/sensor-accessing-script-domain-feats-usecase.csv', function(data) {
     //$.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain-feats.csv', function(data) {
 
 			// start the table
@@ -83,7 +83,7 @@
 				html += "<td>" + text + "</td>";
 				html += "<td>" + columns[3] + "</td>";
         		html += "<td>" + columns[4] + "</td>";
-        		html += "<td>" + columns[5] + "</td>";
+        		html += "<td>" + (parseFloat(columns[5])*12.09).toFixed(2) + "%</td>";
 
 				// close row
 				html += "</tr>";
@@ -103,7 +103,7 @@
 		});
 
 	</script>
-		
+
 	 <script>
     // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
 		$.get('https://raw.githubusercontent.com/sensor-js/sensor-js.github.io/master/assets/domain_sensor_script.csv', function(data) {
@@ -141,8 +141,8 @@
 		            });
 		});
 
-	</script>	
-	
+	</script>
+
   </head>
   <body>
 
@@ -216,35 +216,42 @@
 	</div>
 
 		<p>
-		From our crawl results we found that sensor APIs were accessed on 3695 of the 100K websites by scripts served from 603 distinct domains. Orientation and motion sensors are by far the most frequently accessed, on 2653 and 2036 sites respectively. Light and proximity sensors, which  were only supported by Firefox<a href="#" data-toggle="tooltip" title="Firefox deprecated these sensor APIs; starting with Firefox 60, released in May 2018, they are disabled by default"><sup>[1]</sup></a>, are accessed on fewer than 200 sites each.<br>
+		From our crawl results we found that sensor APIs were accessed on 3695 of the 100K websites by scripts served from 603 distinct domains. Orientation and motion sensors are by far the most frequently accessed, on 2653 and 2036 sites respectively. Light and proximity sensors, which  were only supported by Firefox<a href="#" data-toggle="tooltip" title="Firefox deprecated these sensor APIs; starting with Firefox 60, released in May 2018, they are disabled by default"><sup>[1]</sup></a>, are accessed on fewer than 200 sites each.
 		</p>
+    <p><small>In addition to listing the number of sites that feature scripts, we use the prominence metric <a href="http://randomwalker.info/publications/OpenWPM_1_million_site_tracking_measurement.pdf">proposed by Engelhardt and Narayanan (§5.2)</a> to capture
+      the popularity of the sites where scripts are present. It is calculated as the inverse sum of the rank of the sites: \( \sum 1/\mathit{rank}_i \). For ease of interpretation, we normalize this by dividing by the prominence of all sites, \( \sum_{i=1}^{100000} 1/i, \) and expresss the value as a percentage.</small></p>
 		<div class="row" align="center">
 			<div class="column">
 			<table class="table table-striped table-bordered">
 			  <tr>
 			    <th>Sensor</th>
-			    <th>Num. of sites</th>
-			    <th>Num. of script domains</th>
+			    <th># of sites</th>
+			    <th># of domains</th>
+          <th>Norm. prominence</th>
 			  </tr>
 			  <tr>
 			    <td>Motion</td>
 			    <td>2653</td>
 			    <td>384</td>
+          <td>1.82%</td>
 			  </tr>
 			  <tr>
 			    <td>Orientation</td>
 			    <td>2036</td>
 			    <td>420</td>
+          <td>4.34%</td>
 			  </tr>
 			  <tr>
 			    <td>Proximity</td>
 			    <td>186</td>
 			    <td>50</td>
+          <td>0.13%</td>
 			  </tr>
 			  <tr>
 			    <td>Light</td>
 			    <td>181</td>
 			    <td>35</td>
+          <td>0.13%</td>
 			  </tr>
 			</table>
 			</div>
@@ -321,63 +328,63 @@
 		    <th>Use case</th>
 		    <th>% of JS</th>
 		    <th>Num. of sites</th>
-			<th>Prominence</th>
+			<th>Norm. prominence</th>
 		  </tr>
 		  <tr id="1">
 			<td>1</td>
 		    <td>Reacting to orientation, tilt, shake </td>
 		    <td>6.7%</td>
 		    <td>533</td>
-			<td>0.3821</td>
+			<td>3.16%</td>
 		  </tr>
 		  <tr id="2">
 			<td>2</td>
 		    <td>Scripts clustered as noisy</td>
 		    <td>20.6%</td>
 		    <td>1804</td>
-			<td>0.1773</td>
+			<td>1.47%</td>
 		  </tr>
 		  <tr id="3">
 			<td>3</td>
 		    <td>Tracking, analytics, fingerprinting and audience recognition</td>
 		    <td>36.8%</td>
 		    <td>1198</td>
-			<td>0.1289</td>
+			<td>1.07%</td>
 		  </tr>
 		  <tr id="4">
 			<td>4</td>
 		    <td>Differentiating bots from real devices</td>
 		    <td>17.7%</td>
 		    <td>413</td>
-			<td>0.0464</td>
+			<td>0.38%</td>
 		  </tr>
 		  <tr id="5">
 			<td>5</td>
 		    <td>Checks what HTML5 features are offered</td>
 		    <td>11.2%</td>
 		    <td>114</td>
-			<td>0.0185</td>
+			<td>0.15%</td>
 		  </tr>
 		  <tr id="6">
 			<td>6</td>
 		    <td>Automatically resize contents in page or iframe</td>
 		    <td>3.2%</td>
 		    <td>103</td>
-			<td>0.0045</td>
+			<td>0.04%</td>
 		  </tr>
 		  <tr id="7">
 			<td>7</td>
 		    <td>Parallax engine that reacts to orientation sensors</td>
 		    <td>3.4%</td>
 		    <td>35</td>
-			<td>0.0037</td>
+			<td>0.03%</td>
 		  </tr>
 		  <tr id="8">
 			<td>8</td>
 		    <td>Use sensor data to add entropy to random numbers</td>
 		    <td>0.4%</td>
 		    <td>4</td>
-			<td>0.0001</td>
+			<td>0.00%</td>
 		  </tr>
 		</table>
 		</div>
@@ -434,20 +441,19 @@
 		<h2>Sensor-accessing scripts</h2>
 	</div>
 
-		<p>Scripts from the following domains were found to access one or more sensors APIs.
-The data was collected in May 2018 by crawling homepages of Alexa top 100K sites.<br></p>
+		<p>Scripts from the following domains were found to access one or more sensors APIs.</p>
 
 
 		<div id="table-holder"></div>
-		
+
 	<div id="sensor-domain-table" class="page-header">
 		<h2>Websites where sensors are accessed</h2>
 	</div>
-	
-		<p>The list of websites where one or more sensor were accessed. The data was collected in May 2018 by crawling homepages of Alexa top 100K sites.<br></p>
-		
+
+		<p>The list of websites where one or more sensor were accessed.</p>
+
 		<div id="table-holder-domain"></div>
-		
+
 
     <div id="code" class="page-header">
         <h2>Source code - OpenWPM-Mobile</h2>
@@ -458,14 +464,14 @@ The data was collected in May 2018 by crawling homepages of Alexa top 100K sites
     <div id="data" class="page-header">
         <h2>Data</h2>
       </div>
-         The data collected during the study can be downloaded at <a href="https://databank.illinois.edu/datasets">Illinois data bank</a>.
+      <p>We are preparing our data for release and it will be available shortly.</p>
 
 
     <div id="errata" class="page-header">
-        <h2>Errata</h2>
+        <h2>Paper Errata</h2>
       </div>
-         In p.2, <i>"63% of the scripts that access motion sensors also perform canvas fingerprinting"</i> should have been
-          <i>"63% of the scripts that access motion sensors also perform browser fingerprinting"</i>.
+         On p.2, <i>"63% of the scripts that access motion sensors also perform canvas fingerprinting"</i> should read
+          <i>"63% of the scripts that access motion sensors also perform <b>browser</b> fingerprinting"</i>.
 
 
    <div id="contact" class="page-header">
@@ -474,7 +480,7 @@ The data was collected in May 2018 by crawling homepages of Alexa top 100K sites
     <table class="table table-striped table-bordered">
       <tr class="success"><td><a href="https://www.anupamdas.org/"><b>Anupam Das</b></a> </td><td> <code>anupam.das@ncsu.edu</code> </td></tr>
 			<tr class="active"><td><a href="https://www.esat.kuleuven.be/cosic/people/gunes-acar/"><b>Gunes Acar</b></a> </td><td><code>gunes@princeton.edu</code></a></td></tr>
-      <tr class="warning"><td><a href="https://ece.illinois.edu/directory/profile/nikita"><b>Nikita Borisov</b></a> </td><td> <code>nikita@illinois.edu</code> </td></tr>
+      <tr class="warning"><td><a href="https://hatswitch.org/~nikita/"><b>Nikita Borisov</b></a> </td><td> <code>nikita@illinois.edu</code> </td></tr>
       <tr class="danger"><td><a href="http://amoghbl1.com/"><b>Amogh Pradeep</b></a></td><td> <code>a.pradeep@northeastern.edu</code></td></tr>
     </table>
 		</div>
@@ -482,6 +488,7 @@ The data was collected in May 2018 by crawling homepages of Alexa top 100K sites
 
     </main>
 
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
     <script>
       $(function () {
         $('[data-toggle="tooltip"]').tooltip()
