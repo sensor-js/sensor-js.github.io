@@ -44,7 +44,7 @@
 
 			// start the table
 			var html = '<table id ="sensor_js_urls" class="data-table table table-striped table-bordered">';
-      html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Fingerprinting</th><th>Use cases</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Prominence</th></tr></thead>';
+      html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Fingerprinting</th><th>Use cases</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Norm. prominence</th></tr></thead>';
 			// split into lines
 			var rows = data.split("\n");
 
@@ -72,6 +72,7 @@
 				html += "<td>" + text + "</td>";
 				html += "<td>" + columns[3] + "</td>";
         		html += "<td>" + columns[4] + "</td>";
+            // 12.09 is the max prominence for 100K sites
         		html += "<td>" + (parseFloat(columns[5])/12.09*100).toFixed(2) + "%</td>";
 
 				// close row
@@ -85,7 +86,7 @@
 			$('#table-holder').append(html);
 
 			$('#sensor_js_urls').dataTable( {
-		                "iDisplayLength": 25,
+		                "iDisplayLength": 10,
 		                "sDom": '<lfip<t>>',
                     "aaSorting": [[5, 'desc']],
 		            });
@@ -125,7 +126,7 @@
 			$('#table-holder-domain').append(html);
 
 			$('#sensor_domain_urls').dataTable( {
-		                "iDisplayLength": 25,
+		                "iDisplayLength": 10,
 		                "sDom": '<lfip<t>>'
 		            });
 		});
