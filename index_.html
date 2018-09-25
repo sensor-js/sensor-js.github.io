@@ -83,7 +83,7 @@
 				html += "<td>" + text + "</td>";
 				html += "<td>" + columns[3] + "</td>";
         		html += "<td>" + columns[4] + "</td>";
-        		html += "<td>" + (parseFloat(columns[5])*12.09).toFixed(2) + "%</td>";
+        		html += "<td>" + (parseFloat(columns[5])/12.09*100).toFixed(2) + "%</td>";
 
 				// close row
 				html += "</tr>";
