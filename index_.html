@@ -51,7 +51,6 @@
 	 <script>
     // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
 		$.get('/assets/sensor-accessing-script-domain-feats-usecase.csv', function(data) {
-    //$.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain-feats.csv', function(data) {
 
 			// start the table
 			var html = '<table id ="sensor_js_urls" class="data-table table table-striped table-bordered">';
@@ -106,7 +105,7 @@
 
 	 <script>
     // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
-		$.get('https://raw.githubusercontent.com/sensor-js/sensor-js.github.io/master/assets/domain_sensor_script.csv', function(data) {
+		$.get('/assets/domain_sensor_script.csv', function(data) {
 			// start the table
 			var html = '<table id ="sensor_domain_urls" class="data-table table table-striped table-bordered">';
       	  html += '<thead><tr><th>Rank</th><th>Domain</th><th>Sensors</th><th>Sensor-accessing script domain</th></tr></thead>';
