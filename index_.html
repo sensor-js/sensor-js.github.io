@@ -51,7 +51,6 @@
 	 <script>
     // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
 		$.get('/assets/sensor-accessing-script-domain-feats-usecase.csv', function(data) {
-    //$.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain-feats.csv', function(data) {
 
 			// start the table
 			var html = '<table id ="sensor_js_urls" class="data-table table table-striped table-bordered">';
@@ -106,7 +105,7 @@
 
 	 <script>
     // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
-		$.get('https://raw.githubusercontent.com/sensor-js/sensor-js.github.io/master/assets/domain_sensor_script.csv', function(data) {
+		$.get('/assets/domain_sensor_script.csv', function(data) {
 			// start the table
 			var html = '<table id ="sensor_domain_urls" class="data-table table table-striped table-bordered">';
       	  html += '<thead><tr><th>Rank</th><th>Domain</th><th>Sensors</th><th>Sensor-accessing script domain</th></tr></thead>';
@@ -320,7 +319,7 @@
 		<h4>Sensors are frequently used for tracking and advertising</h4>
 	</div>
 
-		<p>By clustering scripts based on features extracted from instrumentation data we were able to classify major use cases. We found that sensor data are commonly used for tracking and analytics, verifying ad impressions, and distinguishing real devices from bots. We also found that a large fraction of the scripts that access sensors also perform some form of browser fingerprinting.</p>
+		<p>By clustering scripts based on <a href="/assets/features.csv">features</a> extracted from instrumentation data we were able to classify major use cases. We found that sensor data are commonly used for tracking and analytics, verifying ad impressions, and distinguishing real devices from bots.</p>
 		<div class="col-md-12">
 		<table class="sortable table table-striped table-bordered">
 		  <tr id="id">
@@ -389,6 +388,63 @@
 		</table>
 		</div>
 
+		<p>We also found that a large fraction of the scripts that access sensors also perform some form of browser fingerprinting.</p>
+		<div class="col-md-12">
+		<table class="table table-striped table-bordered">
+		  <tr>
+			<th>Sensor</th>
+		    <th>Canvas FP</th>
+		    <th>Canvas Font FP</th>
+		    <th>Audio FP</th>
+			<th>WebRTC FP</th>
+			<th>Battery FP</th>
+			<th>Any FP</th>
+			<th>Total scripts</th>
+		  </tr>
+		  <tr>
+			<td>Motion</td>
+		    <td>56.7%</td>
+		    <td>0.2%</td>
+		    <td>19.8%</td>
+			<td>6.8%</td>
+			<td>5.6%</td>
+			<td>62.7%</td>
+			<td>501</td>
+		  </tr>
+		  <tr>
+			<td>Orientation</td>
+		    <td>36.2%</td>
+		    <td>3.4%</td>
+		    <td>5.7%</td>
+			<td>6.2%</td>
+			<td>4.5%</td>
+			<td>41.7%</td>
+			<td>650</td>
+		  </tr>
+		  <tr>
+			<td>Proximity</td>
+		    <td>2.1%</td>
+		    <td>0.0%</td>
+		    <td>47.9%</td>
+			<td>0.0%</td>
+			<td>49.0%</td>
+			<td>51.0%</td>
+			<td>96</td>
+		  </tr>
+		  <tr>
+			<td>Light</td>
+		    <td>19.5%</td>
+		    <td>1.2%</td>
+		    <td>56.1%</td>
+			<td>15.9%</td>
+			<td>57.3%</td>
+			<td>76.8%</td>
+			<td>82</td>
+		  </tr>
+		</table>
+		</div>
+		
+		
 	<div id="efficacy-of-antitrackers" class="page-header">
 		<h4>Existing ad blocking and tracking protection lists are inefficient</h4>
 	</div>
@@ -479,7 +535,7 @@
     <div class="col-md-6">
     <table class="table table-striped table-bordered">
       <tr class="success"><td><a href="https://www.anupamdas.org/"><b>Anupam Das</b></a> </td><td> <code>anupam.das@ncsu.edu</code> </td></tr>
-			<tr class="active"><td><a href="https://www.esat.kuleuven.be/cosic/people/gunes-acar/"><b>Gunes Acar</b></a> </td><td><code>gunes@princeton.edu</code></a></td></tr>
+			<tr class="active"><td><a href="https://gunesacar.net/"><b>Gunes Acar</b></a> </td><td><code>gunes@princeton.edu</code></a></td></tr>
       <tr class="warning"><td><a href="https://hatswitch.org/~nikita/"><b>Nikita Borisov</b></a> </td><td> <code>nikita@illinois.edu</code> </td></tr>
       <tr class="danger"><td><a href="http://amoghbl1.com/"><b>Amogh Pradeep</b></a></td><td> <code>a.pradeep@northeastern.edu</code></td></tr>
     </table>
@@ -488,7 +544,7 @@
 
     </main>
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    <script type="text/javascript" async src="assets/js/MathJax/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script>
       $(function () {
         $('[data-toggle="tooltip"]').tooltip()
