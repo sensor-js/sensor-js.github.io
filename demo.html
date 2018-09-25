@@ -12,13 +12,13 @@
 
     <!-- CSS to customize styles -->
     <link href="/assets/css/custom.css" rel="stylesheet">
-	<script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery-1.9.1.min.js"></script>
-	 <link rel="stylesheet" href="https://sensor-js.xyz/assets/css/jquery-ui.css" />
-	<script src="https://sensor-js.xyz/assets/js/jquery-ui.min.js"></script>
-		<style type="text/css" title="currentStyle">
-		        @import "https://sensor-js.xyz/assets/css/demo_page.css";
-		        @import "https://sensor-js.xyz/assets/css/demo_table.css";
-		</style>
+  <script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery-1.9.1.min.js"></script>
+   <link rel="stylesheet" href="https://sensor-js.xyz/assets/css/jquery-ui.css" />
+  <script src="https://sensor-js.xyz/assets/js/jquery-ui.min.js"></script>
+    <style type="text/css" title="currentStyle">
+            @import "https://sensor-js.xyz/assets/css/demo_page.css";
+            @import "https://sensor-js.xyz/assets/css/demo_table.css";
+    </style>
 <style>
   h1 { font-family: Helvetica; font-size: 48px;}
   h2 { font-family: Helvetica; font-size: 40px;}
@@ -35,27 +35,26 @@
 <p id="Orientation_g"></p>
 
 <h2>Accelerometer</h2>
-<p id="Accelerometer_gx"></p>
-<p id="Accelerometer_gy"></p>
-<p id="Accelerometer_gz"></p>
 <p id="Accelerometer_x"></p>
 <p id="Accelerometer_y"></p>
 <p id="Accelerometer_z"></p>
 <p id="Accelerometer_i"></p>
-
-<h2>Gyro</h2>
-<p id="Gyro_x"></p>
-<p id="Gyro_y"></p>
-<p id="Gyro_z"></p>
+<p id="Accelerometer_gx"></p>
+<p id="Accelerometer_gy"></p>
+<p id="Accelerometer_gz"></p>
+<h2>Gyroscope</h2>
+<p id="Gyroscope_x"></p>
+<p id="Gyroscope_y"></p>
+<p id="Gyroscope_z"></p>
 
 <script>
 var get_el_by_id = document.getElementById;
 window.addEventListener('devicelight', function(e) {
    document.getElementById("DeviceLight").innerHTML="AmbientLight current Value: "+e.value+" Max: "+e.max+" Min: "+e.min;
-});     
-    
+});
+
 window.addEventListener('lightlevel', function(e) {
-   document.getElementById("LightString").innerHTML="Light level: "+e.value; 
+   document.getElementById("LightString").innerHTML="Light level: "+e.value;
 });
 
 window.addEventListener('deviceproximity', function(e) {
@@ -74,12 +73,12 @@ function handleOrientation(event) {
     var alpha    = event.alpha;
     var beta     = event.beta;
     var gamma    = event.gamma;
-    if (event.alpha != null)	
-        document.getElementById('Orientation_a').innerHTML = "Z-axis: "+alpha.toFixed(10);
+    if (event.alpha != null)
+        document.getElementById('Orientation_a').innerHTML = "Alpha (Z-axis): "+alpha.toFixed(10);
     if (event.beta != null)
-        document.getElementById('Orientation_b').innerHTML = "X-axis: "+beta.toFixed(10);
-    if (event.gamma != null)	
-        document.getElementById('Orientation_g').innerHTML = "Y-axis: "+gamma.toFixed(10);
+        document.getElementById('Orientation_b').innerHTML = "Beta (X-axis): "+beta.toFixed(10);
+    if (event.gamma != null)
+        document.getElementById('Orientation_g').innerHTML = "Gamma (Y-axis): "+gamma.toFixed(10);
     // Do stuff with the new orientation data
 }
 
@@ -88,28 +87,28 @@ window.addEventListener("devicemotion", handleMotion);
 
 function handleMotion(event) {
   if (event.accelerationIncludingGravity.x != null)
-  	document.getElementById('Accelerometer_gx').innerHTML = "AccIncludingGravity X-axis: "+event.accelerationIncludingGravity.x.toFixed(10);
-  if (event.accelerationIncludingGravity.y != null)	
-  	document.getElementById('Accelerometer_gy').innerHTML = "AccIncludingGravity Y-axis: "+event.accelerationIncludingGravity.y.toFixed(10);
+    document.getElementById('Accelerometer_gx').innerHTML = "Accelerometer Including Gravity X-axis: "+event.accelerationIncludingGravity.x.toFixed(10);
+  if (event.accelerationIncludingGravity.y != null)
+    document.getElementById('Accelerometer_gy').innerHTML = "Accelerometer Including Gravity Y-axis: "+event.accelerationIncludingGravity.y.toFixed(10);
   if (event.accelerationIncludingGravity.z != null)
-  	document.getElementById('Accelerometer_gz').innerHTML = "AccIncludingGravity Z-axis: "+event.accelerationIncludingGravity.z.toFixed(10);
-  
+    document.getElementById('Accelerometer_gz').innerHTML = "Accelerometer Including Gravity Z-axis: "+event.accelerationIncludingGravity.z.toFixed(10);
+
   if (event.acceleration.x != null)
-  	document.getElementById('Accelerometer_x').innerHTML = "Accelerometer X-axis: "+event.acceleration.x.toFixed(10);
+    document.getElementById('Accelerometer_x').innerHTML = "Accelerometer X-axis: "+event.acceleration.x.toFixed(10);
   if (event.acceleration.y != null)
-  	document.getElementById('Accelerometer_y').innerHTML = "Accelerometer Y-axis: "+event.acceleration.y.toFixed(10);
+    document.getElementById('Accelerometer_y').innerHTML = "Accelerometer Y-axis: "+event.acceleration.y.toFixed(10);
   if (event.acceleration.z != null)
-  	document.getElementById('Accelerometer_z').innerHTML = "Accelerometer Z-axis: "+event.acceleration.z.toFixed(10);
-  
+    document.getElementById('Accelerometer_z').innerHTML = "Accelerometer Z-axis: "+event.acceleration.z.toFixed(10);
+
   if (event.interval != null)
-  	document.getElementById('Accelerometer_i').innerHTML = "Data Interval: "+event.interval.toFixed(10);
-  
+    document.getElementById('Accelerometer_i').innerHTML = "Data Interval: "+event.interval.toFixed(10);
+
   if (event.rotationRate.alpha != null)
-  	document.getElementById('Gyro_z').innerHTML = "Gyro Z-axis: "+event.rotationRate.alpha.toFixed(10);
+    document.getElementById('Gyroscope_z').innerHTML = "Gyroscope Z-axis: "+event.rotationRate.alpha.toFixed(10);
   if (event.rotationRate.beta != null)
-  	document.getElementById('Gyro_x').innerHTML = "Gyro X-axis: "+event.rotationRate.beta.toFixed(10);
+    document.getElementById('Gyroscope_x').innerHTML = "Gyroscope X-axis: "+event.rotationRate.beta.toFixed(10);
   if (event.rotationRate.gamma != null)
-  	document.getElementById('Gyro_y').innerHTML = "Gyro Y-axis: "+event.rotationRate.gamma.toFixed(10);
+    document.getElementById('Gyroscope_y').innerHTML = "Gyroscope Y-axis: "+event.rotationRate.gamma.toFixed(10);
   //setTimeout(handler,5000);
 }
 
@@ -122,27 +121,27 @@ if (window.navigator.oscpu)
 function handleMotion1(event) {
   if (event.accelerationIncludingGravity.x != null)
         document.getElementById('Accelerometer_tgx').innerHTML = "AccelerometerIncludingGravity X-axis: "+event.accelerationIncludingGravity.x.toFixed(10);
-  if (event.accelerationIncludingGravity.y != null)     
+  if (event.accelerationIncludingGravity.y != null)
         document.getElementById('Accelerometer_tgy').innerHTML = "AccelerometerIncludingGravity Y-axis: "+event.accelerationIncludingGravity.y.toFixed(10);
   if (event.accelerationIncludingGravity.z != null)
         document.getElementById('Accelerometer_tgz').innerHTML = "AccelerometerIncludingGravity Z-axis: "+event.accelerationIncludingGravity.z.toFixed(10);
-  
+
   if (event.acceleration.x != null)
         document.getElementById('Accelerometer_tx').innerHTML = "Accelerometer X-axis: "+event.acceleration.x.toFixed(10);
   if (event.acceleration.y != null)
         document.getElementById('Accelerometer_ty').innerHTML = "Accelerometer Y-axis: "+event.acceleration.y.toFixed(10);
   if (event.acceleration.z != null)
         document.getElementById('Accelerometer_tz').innerHTML = "Accelerometer Z-axis: "+event.acceleration.z.toFixed(10);
-  
+
   if (event.interval != null)
         document.getElementById('Accelerometer_ti').innerHTML = "Data Interval: "+event.interval.toFixed(10);
-  
+
   if (event.rotationRate.alpha != null)
-        document.getElementById('Gyro_tz').innerHTML = "Gyro Z-axis: "+event.rotationRate.alpha.toFixed(10);
+        document.getElementById('Gyroscope_tz').innerHTML = "Gyroscope Z-axis: "+event.rotationRate.alpha.toFixed(10);
   if (event.rotationRate.beta != null)
-        document.getElementById('Gyro_tx').innerHTML = "Gyro X-axis: "+event.rotationRate.beta.toFixed(10);
+        document.getElementById('Gyroscope_tx').innerHTML = "Gyroscope X-axis: "+event.rotationRate.beta.toFixed(10);
   if (event.rotationRate.gamma != null)
-        document.getElementById('Gyro_ty').innerHTML = "Gyro Y-axis: "+event.rotationRate.gamma.toFixed(10);
+        document.getElementById('Gyroscope_ty').innerHTML = "Gyroscope Y-axis: "+event.rotationRate.gamma.toFixed(10);
   //setTimeout(handler,5000);
 }
 
