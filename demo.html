@@ -5,36 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Demo - The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors</title>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <!-- CSS to customize styles -->
-  <script src="https://sensor-js.xyz/assets/js/jquery-ui.min.js"></script>
-<title>Sensor Access Demo</title>
+    <title>Sensor Access Demo</title>
+    <style>
+      p {margin-bottom: 0.3rem;}
+    </style>
 </head>
 <body>
+<main role="main" class="container">
+
 <h1 align="left">Sensor Access Demo</h1>
 
-<p> This is a demo page showcasing how websites can access sensor data from mobile devices. The most common sensor APIs include <i>deviceorientation</i> and <i>devicemotion</i>. These sensor APIs provide data along three axes as shown below when browsed from a mobile device. <br><br>
+<p> This is a demo page showcasing how websites can access sensor data from mobile devices. Two sensor APIs supported by all modern browsers are
+<i>deviceorientation</i> and <i>devicemotion</i>.</p>
 
-<i>deviceorientation</i> provides <i>alpha</i>, <i>beta</i> and <i>gamma</i> components which correspond to orientation along the Z, X and Y axes, respectively. <i>devicemotion</i> provides acceleration and rotation rate along three axes using MEMS accelerometers and gyroscopes.
+<p><i>deviceorientation</i> provides <i>alpha</i>, <i>beta</i> and <i>gamma</i> components which correspond to orientation along the Z, X and Y axes, respectively. <i>devicemotion</i> provides acceleration and rotation rate along three axes using MEMS accelerometers and gyroscopes.</p>
 
-<h2>Orientation data</h2>
+<h2>Orientation</h2>
 <p id="Orientation_a"></p>
 <p id="Orientation_b"></p>
 <p id="Orientation_g"></p>
 
-<h2>Accelerometer data</h2>
+<h2>Accelerometer</h2>
 <p id="Accelerometer_x"></p>
 <p id="Accelerometer_y"></p>
 <p id="Accelerometer_z"></p>
 <p id="Accelerometer_i"></p>
+<h3>Accelerometer including gravity</h3>
 <p id="Accelerometer_gx"></p>
 <p id="Accelerometer_gy"></p>
 <p id="Accelerometer_gz"></p>
 
-<h2>Gyroscope data</h2>
+<h2>Gyroscope</h2>
 <p id="Gyroscope_x"></p>
 <p id="Gyroscope_y"></p>
 <p id="Gyroscope_z"></p>
-
+</main>
 <script>
 var get_el_by_id = document.getElementById;
 window.addEventListener('devicelight', function(e) {
@@ -75,65 +80,59 @@ window.addEventListener("devicemotion", handleMotion);
 
 function handleMotion(event) {
   if (event.accelerationIncludingGravity.x != null)
-    document.getElementById('Accelerometer_gx').innerHTML = "Accelerometer Including Gravity X-axis: "+event.accelerationIncludingGravity.x.toFixed(10);
+    document.getElementById('Accelerometer_gx').innerHTML = "X-axis: "+event.accelerationIncludingGravity.x.toFixed(10);
   if (event.accelerationIncludingGravity.y != null)
-    document.getElementById('Accelerometer_gy').innerHTML = "Accelerometer Including Gravity Y-axis: "+event.accelerationIncludingGravity.y.toFixed(10);
+    document.getElementById('Accelerometer_gy').innerHTML = "Y-axis: "+event.accelerationIncludingGravity.y.toFixed(10);
   if (event.accelerationIncludingGravity.z != null)
-    document.getElementById('Accelerometer_gz').innerHTML = "Accelerometer Including Gravity Z-axis: "+event.accelerationIncludingGravity.z.toFixed(10);
+    document.getElementById('Accelerometer_gz').innerHTML = "Z-axis: "+event.accelerationIncludingGravity.z.toFixed(10);
 
   if (event.acceleration.x != null)
-    document.getElementById('Accelerometer_x').innerHTML = "Accelerometer X-axis: "+event.acceleration.x.toFixed(10);
+    document.getElementById('Accelerometer_x').innerHTML = "X-axis: "+event.acceleration.x.toFixed(10);
   if (event.acceleration.y != null)
-    document.getElementById('Accelerometer_y').innerHTML = "Accelerometer Y-axis: "+event.acceleration.y.toFixed(10);
+    document.getElementById('Accelerometer_y').innerHTML = "Y-axis: "+event.acceleration.y.toFixed(10);
   if (event.acceleration.z != null)
-    document.getElementById('Accelerometer_z').innerHTML = "Accelerometer Z-axis: "+event.acceleration.z.toFixed(10);
+    document.getElementById('Accelerometer_z').innerHTML = "Z-axis: "+event.acceleration.z.toFixed(10);
 
   if (event.interval != null)
     document.getElementById('Accelerometer_i').innerHTML = "Data Interval: "+event.interval.toFixed(10);
 
   if (event.rotationRate.alpha != null)
-    document.getElementById('Gyroscope_z').innerHTML = "Gyroscope Z-axis: "+event.rotationRate.alpha.toFixed(10);
+    document.getElementById('Gyroscope_z').innerHTML = "Z-axis: "+event.rotationRate.alpha.toFixed(10);
   if (event.rotationRate.beta != null)
-    document.getElementById('Gyroscope_x').innerHTML = "Gyroscope X-axis: "+event.rotationRate.beta.toFixed(10);
+    document.getElementById('Gyroscope_x').innerHTML = "X-axis: "+event.rotationRate.beta.toFixed(10);
   if (event.rotationRate.gamma != null)
-    document.getElementById('Gyroscope_y').innerHTML = "Gyroscope Y-axis: "+event.rotationRate.gamma.toFixed(10);
-  //setTimeout(handler,5000);
+    document.getElementById('Gyroscope_y').innerHTML = "Y-axis: "+event.rotationRate.gamma.toFixed(10);
 }
-
-if (window.navigator.oscpu)
-   document.getElementById('oscpu').innerHTML = "OSCPU: "+window.navigator.oscpu;
-
-
-//top.window.addEventListener("devicemotion", handleMotion1);
 
 function handleMotion1(event) {
   if (event.accelerationIncludingGravity.x != null)
-        document.getElementById('Accelerometer_tgx').innerHTML = "AccelerometerIncludingGravity X-axis: "+event.accelerationIncludingGravity.x.toFixed(10);
+        document.getElementById('Accelerometer_tgx').innerHTML = "X: "+event.accelerationIncludingGravity.x.toFixed(10);
   if (event.accelerationIncludingGravity.y != null)
-        document.getElementById('Accelerometer_tgy').innerHTML = "AccelerometerIncludingGravity Y-axis: "+event.accelerationIncludingGravity.y.toFixed(10);
+        document.getElementById('Accelerometer_tgy').innerHTML = "Y: "+event.accelerationIncludingGravity.y.toFixed(10);
   if (event.accelerationIncludingGravity.z != null)
-        document.getElementById('Accelerometer_tgz').innerHTML = "AccelerometerIncludingGravity Z-axis: "+event.accelerationIncludingGravity.z.toFixed(10);
+        document.getElementById('Accelerometer_tgz').innerHTML = "Z: "+event.accelerationIncludingGravity.z.toFixed(10);
 
   if (event.acceleration.x != null)
-        document.getElementById('Accelerometer_tx').innerHTML = "Accelerometer X-axis: "+event.acceleration.x.toFixed(10);
+        document.getElementById('Accelerometer_tx').innerHTML = "X: "+event.acceleration.x.toFixed(10);
   if (event.acceleration.y != null)
-        document.getElementById('Accelerometer_ty').innerHTML = "Accelerometer Y-axis: "+event.acceleration.y.toFixed(10);
+        document.getElementById('Accelerometer_ty').innerHTML = "Y: "+event.acceleration.y.toFixed(10);
   if (event.acceleration.z != null)
-        document.getElementById('Accelerometer_tz').innerHTML = "Accelerometer Z-axis: "+event.acceleration.z.toFixed(10);
+        document.getElementById('Accelerometer_tz').innerHTML = "Z: "+event.acceleration.z.toFixed(10);
 
   if (event.interval != null)
         document.getElementById('Accelerometer_ti').innerHTML = "Data Interval: "+event.interval.toFixed(10);
 
   if (event.rotationRate.alpha != null)
-        document.getElementById('Gyroscope_tz').innerHTML = "Gyroscope Z-axis: "+event.rotationRate.alpha.toFixed(10);
+        document.getElementById('Gyroscope_tz').innerHTML = "Z: "+event.rotationRate.alpha.toFixed(10);
   if (event.rotationRate.beta != null)
-        document.getElementById('Gyroscope_tx').innerHTML = "Gyroscope X-axis: "+event.rotationRate.beta.toFixed(10);
+        document.getElementById('Gyroscope_tx').innerHTML = "X: "+event.rotationRate.beta.toFixed(10);
   if (event.rotationRate.gamma != null)
-        document.getElementById('Gyroscope_ty').innerHTML = "Gyroscope Y-axis: "+event.rotationRate.gamma.toFixed(10);
+        document.getElementById('Gyroscope_ty').innerHTML = "Y: "+event.rotationRate.gamma.toFixed(10);
   //setTimeout(handler,5000);
 }
 
 
 </script>
+
 </body>
 </html>
