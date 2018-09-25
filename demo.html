@@ -12,40 +12,48 @@
 </head>
 <body>
 <main role="main" class="container">
-<div class="p-3 mb-2 bg-secondary text-white">
+
 <h1 align="left">Sensor Access Demo</h1>
 
 <p>This is a demo page showcasing how websites can access sensor data from mobile devices.</p>
 
 <p>Two sensor events supported by all modern browsers are
-<a href="https://developer.mozilla.org/en-US/docs/Web/Events/devicemotion" class="text-dark"><i>deviceorientation</i></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/Events/deviceorientation" class="text-dark"><i>devicemotion</i></a>. <i>deviceorientation</i> provides <i>alpha</i>, <i>beta</i> and <i>gamma</i> components which correspond to orientation along the Z, X and Y axes, respectively. <i>devicemotion</i> provides acceleration and rotation rate along three axes using MEMS accelerometers and gyroscopes.</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/Events/devicemotion"><i>deviceorientation</i></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/Events/deviceorientation"><i>devicemotion</i></a>. <i>deviceorientation</i> provides <i>alpha</i>, <i>beta</i> and <i>gamma</i> components which correspond to orientation along the Z, X and Y axes, respectively. <i>devicemotion</i> provides acceleration and rotation rate along three axes using MEMS accelerometers and gyroscopes.</p>
 
-<p>The sensor data shown below does not leave your browser: it is not collected, shared or transmitted. However this may not be true for other websites that you visit. See the companion web page for the ACM CCS'18 paper <a href="https://sensor-js.xyz/" class="text-dark">"The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors"</a> for more information.</p>
+<p>The sensor data shown below does not leave your browser: it is not collected, shared or transmitted. However this may not be true for other websites that you visit. See the companion web page for the ACM CCS'18 paper <a href="https://sensor-js.xyz/">"The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors"</a> for more information.</p>
 
-<div>
-<a id="start_demo" class="btn btn-lg btn-warning" href="#" role="button">Start the demo</a>
-</div>
+<div class="p-3 mb-2 bg-secondary text-white">
+<a id="start_demo" class="btn btn-lg btn-success" href="#" role="button">Start the demo</a>
 
-<h2>Orientation</h2>
-<p id="Orientation_a"></p>
-<p id="Orientation_b"></p>
-<p id="Orientation_g"></p>
+<h3 style="margin-top:1rem;">Orientation</h3>
+<ul>
+  <li>X-axis (&beta;): <span id="Orientation_b">?</span></li>
+  <li>Y-axis (&gamma;): <span id="Orientation_g">?</span></li>
+  <li>Z-axis (&alpha;): <span id="Orientation_a">?</span></li>
+</ul>
 
-<h2>Accelerometer</h2>
-<p id="Accelerometer_x"></p>
-<p id="Accelerometer_y"></p>
-<p id="Accelerometer_z"></p>
-<p id="Accelerometer_i"></p>
+<h3>Accelerometer</h3>
+<ul>
+  <li>X-axis: <span id="Accelerometer_x">?</span></li>
+  <li>Y-axis: <span id="Accelerometer_y">?</span></li>
+  <li>Z-axis: <span id="Accelerometer_z">?</span></li>
+  <li>Data Interval: <span id="Accelerometer_i">?</span></li>
+</ul>
 
 <h3>Accelerometer including gravity</h3>
-<p id="Accelerometer_gx"></p>
-<p id="Accelerometer_gy"></p>
-<p id="Accelerometer_gz"></p>
 
-<h2>Gyroscope</h2>
-<p id="Gyroscope_x"></p>
-<p id="Gyroscope_y"></p>
-<p id="Gyroscope_z"></p>
+<ul>
+  <li>X-axis: <span id="Accelerometer_gx">?</span></li>
+  <li>Y-axis: <span id="Accelerometer_gy">?</span></li>
+  <li>Z-axis: <span id="Accelerometer_gz">?</span></li>
+</ul>
+
+<h3>Gyroscope</h3>
+<ul>
+  <li>X-axis: <span id="Gyroscope_x">?</span></li>
+  <li>Y-axis: <span id="Gyroscope_y">?</span></li>
+  <li>Z-axis: <span id="Gyroscope_z">?</span></li>
+</ul>
 
 </div>
 </main>
@@ -58,56 +66,49 @@
 <script>
 
 function handleOrientation(event) {
-    var absolute = event.absolute;
-    var alpha    = event.alpha;
-    var beta     = event.beta;
-    var gamma    = event.gamma;
-    if (event.alpha != null)
-        document.getElementById('Orientation_a').innerHTML = "Alpha (Z-axis): "+alpha.toFixed(10);
-    if (event.beta != null)
-        document.getElementById('Orientation_b').innerHTML = "Beta (X-axis): "+beta.toFixed(10);
-    if (event.gamma != null)
-        document.getElementById('Orientation_g').innerHTML = "Gamma (Y-axis): "+gamma.toFixed(10);
+  updateFieldIfNotNull('Orientation_a', event.alpha);
+  updateFieldIfNotNull('Orientation_b', event.beta);
+  updateFieldIfNotNull('Orientation_g', event.gamma);
 }
 
+function updateFieldIfNotNull(fieldName, value, precision=10){
+  if (value != null)
+    document.getElementById(fieldName).innerHTML = value.toFixed(precision);
+}
 
 function handleMotion(event) {
-  if (event.accelerationIncludingGravity.x != null)
-    document.getElementById('Accelerometer_gx').innerHTML = "X-axis: "+event.accelerationIncludingGravity.x.toFixed(10);
-  if (event.accelerationIncludingGravity.y != null)
-    document.getElementById('Accelerometer_gy').innerHTML = "Y-axis: "+event.accelerationIncludingGravity.y.toFixed(10);
-  if (event.accelerationIncludingGravity.z != null)
-    document.getElementById('Accelerometer_gz').innerHTML = "Z-axis: "+event.accelerationIncludingGravity.z.toFixed(10);
+  updateFieldIfNotNull('Accelerometer_gx', event.accelerationIncludingGravity.x);
+  updateFieldIfNotNull('Accelerometer_gy', event.accelerationIncludingGravity.y);
+  updateFieldIfNotNull('Accelerometer_gz', event.accelerationIncludingGravity.z);
 
-  if (event.acceleration.x != null)
-    document.getElementById('Accelerometer_x').innerHTML = "X-axis: "+event.acceleration.x.toFixed(10);
-  if (event.acceleration.y != null)
-    document.getElementById('Accelerometer_y').innerHTML = "Y-axis: "+event.acceleration.y.toFixed(10);
-  if (event.acceleration.z != null)
-    document.getElementById('Accelerometer_z').innerHTML = "Z-axis: "+event.acceleration.z.toFixed(10);
+  updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
+  updateFieldIfNotNull('Accelerometer_y', event.acceleration.y);
+  updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
 
-  if (event.interval != null)
-    document.getElementById('Accelerometer_i').innerHTML = "Data Interval: "+event.interval.toFixed(10);
+  updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
 
-  if (event.rotationRate.alpha != null)
-    document.getElementById('Gyroscope_z').innerHTML = "Z-axis: "+event.rotationRate.alpha.toFixed(10);
-  if (event.rotationRate.beta != null)
-    document.getElementById('Gyroscope_x').innerHTML = "X-axis: "+event.rotationRate.beta.toFixed(10);
-  if (event.rotationRate.gamma != null)
-    document.getElementById('Gyroscope_y').innerHTML = "Y-axis: "+event.rotationRate.gamma.toFixed(10);
+  updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
+  updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
+  updateFieldIfNotNull('Gyroscope_y', event.rotationRate.gamma);
+
 }
 
 let is_running = false;
-document.getElementById("start_demo").onclick = function() {
+let demo_button = document.getElementById("start_demo");
+demo_button.onclick = function() {
   if (is_running){
     window.removeEventListener("devicemotion", handleMotion);
     window.removeEventListener("deviceorientation", handleOrientation);
-    document.getElementById("start_demo").innerHTML = "Start the demo";
+    demo_button.innerHTML = "Start the demo";
+    demo_button.classList.add('btn-success');
+    demo_button.classList.remove('btn-danger');
     is_running = false;
   }else{
     window.addEventListener("devicemotion", handleMotion);
     window.addEventListener("deviceorientation", handleOrientation);
     document.getElementById("start_demo").innerHTML = "Stop the demo";
+    demo_button.classList.remove('btn-success');
+    demo_button.classList.add('btn-danger');
     is_running = true;
   }
 };
