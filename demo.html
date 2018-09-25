@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+
+    <title>The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors</title>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS to customize styles -->
+    <link href="/assets/css/custom.css" rel="stylesheet">
+	<script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery-1.9.1.min.js"></script>
+	 <link rel="stylesheet" href="https://sensor-js.xyz/assets/css/jquery-ui.css" />
+	<script src="https://sensor-js.xyz/assets/js/jquery-ui.min.js"></script>
+		<style type="text/css" title="currentStyle">
+		        @import "https://sensor-js.xyz/assets/css/demo_page.css";
+		        @import "https://sensor-js.xyz/assets/css/demo_table.css";
+		</style>
+<style>
+  h1 { font-family: Helvetica; font-size: 48px;}
+  h2 { font-family: Helvetica; font-size: 40px;}
+  p { font-family: "Helvetica Neue", Helvetica; font-size: 32px; }
+</style>
+<title>Sensor Access Demo</title>
+</head>
+<body>
+<h1 align="left">Motion Sensor Test</h1>
+
+<h2>Orientation</h2>
+<p id="Orientation_a"></p>
+<p id="Orientation_b"></p>
+<p id="Orientation_g"></p>
+
+<h2>Accelerometer</h2>
+<p id="Accelerometer_gx"></p>
+<p id="Accelerometer_gy"></p>
+<p id="Accelerometer_gz"></p>
+<p id="Accelerometer_x"></p>
+<p id="Accelerometer_y"></p>
+<p id="Accelerometer_z"></p>
+<p id="Accelerometer_i"></p>
+
+<h2>Gyro</h2>
+<p id="Gyro_x"></p>
+<p id="Gyro_y"></p>
+<p id="Gyro_z"></p>
+
+<script>
+var get_el_by_id = document.getElementById;
+window.addEventListener('devicelight', function(e) {
+   document.getElementById("DeviceLight").innerHTML="AmbientLight current Value: "+e.value+" Max: "+e.max+" Min: "+e.min;
+});     
+    
+window.addEventListener('lightlevel', function(e) {
+   document.getElementById("LightString").innerHTML="Light level: "+e.value; 
+});
+
+window.addEventListener('deviceproximity', function(e) {
+   document.getElementById("DeviceProximity").innerHTML="DeviceProximity current Value: "+e.value+" Max: "+e.max+" Min: "+e.min;
+});
+
+window.addEventListener('userproximity', function(event) {
+   document.getElementById("UserProximity").innerHTML="UserProximity: "+event.near;
+});
+
+
+window.addEventListener("deviceorientation", handleOrientation);
+
+function handleOrientation(event) {
+    var absolute = event.absolute;
+    var alpha    = event.alpha;
+    var beta     = event.beta;
+    var gamma    = event.gamma;
+    if (event.alpha != null)	
+        document.getElementById('Orientation_a').innerHTML = "Z-axis: "+alpha.toFixed(10);
+    if (event.beta != null)
+        document.getElementById('Orientation_b').innerHTML = "X-axis: "+beta.toFixed(10);
+    if (event.gamma != null)	
+        document.getElementById('Orientation_g').innerHTML = "Y-axis: "+gamma.toFixed(10);
+    // Do stuff with the new orientation data
+}
+
+
+window.addEventListener("devicemotion", handleMotion);
+
+function handleMotion(event) {
+  if (event.accelerationIncludingGravity.x != null)
+  	document.getElementById('Accelerometer_gx').innerHTML = "AccIncludingGravity X-axis: "+event.accelerationIncludingGravity.x.toFixed(10);
+  if (event.accelerationIncludingGravity.y != null)	
+  	document.getElementById('Accelerometer_gy').innerHTML = "AccIncludingGravity Y-axis: "+event.accelerationIncludingGravity.y.toFixed(10);
+  if (event.accelerationIncludingGravity.z != null)
+  	document.getElementById('Accelerometer_gz').innerHTML = "AccIncludingGravity Z-axis: "+event.accelerationIncludingGravity.z.toFixed(10);
+  
+  if (event.acceleration.x != null)
+  	document.getElementById('Accelerometer_x').innerHTML = "Accelerometer X-axis: "+event.acceleration.x.toFixed(10);
+  if (event.acceleration.y != null)
+  	document.getElementById('Accelerometer_y').innerHTML = "Accelerometer Y-axis: "+event.acceleration.y.toFixed(10);
+  if (event.acceleration.z != null)
+  	document.getElementById('Accelerometer_z').innerHTML = "Accelerometer Z-axis: "+event.acceleration.z.toFixed(10);
+  
+  if (event.interval != null)
+  	document.getElementById('Accelerometer_i').innerHTML = "Data Interval: "+event.interval.toFixed(10);
+  
+  if (event.rotationRate.alpha != null)
+  	document.getElementById('Gyro_z').innerHTML = "Gyro Z-axis: "+event.rotationRate.alpha.toFixed(10);
+  if (event.rotationRate.beta != null)
+  	document.getElementById('Gyro_x').innerHTML = "Gyro X-axis: "+event.rotationRate.beta.toFixed(10);
+  if (event.rotationRate.gamma != null)
+  	document.getElementById('Gyro_y').innerHTML = "Gyro Y-axis: "+event.rotationRate.gamma.toFixed(10);
+  //setTimeout(handler,5000);
+}
+
+if (window.navigator.oscpu)
+   document.getElementById('oscpu').innerHTML = "OSCPU: "+window.navigator.oscpu;
+
+
+//top.window.addEventListener("devicemotion", handleMotion1);
+
+function handleMotion1(event) {
+  if (event.accelerationIncludingGravity.x != null)
+        document.getElementById('Accelerometer_tgx').innerHTML = "AccelerometerIncludingGravity X-axis: "+event.accelerationIncludingGravity.x.toFixed(10);
+  if (event.accelerationIncludingGravity.y != null)     
+        document.getElementById('Accelerometer_tgy').innerHTML = "AccelerometerIncludingGravity Y-axis: "+event.accelerationIncludingGravity.y.toFixed(10);
+  if (event.accelerationIncludingGravity.z != null)
+        document.getElementById('Accelerometer_tgz').innerHTML = "AccelerometerIncludingGravity Z-axis: "+event.accelerationIncludingGravity.z.toFixed(10);
+  
+  if (event.acceleration.x != null)
+        document.getElementById('Accelerometer_tx').innerHTML = "Accelerometer X-axis: "+event.acceleration.x.toFixed(10);
+  if (event.acceleration.y != null)
+        document.getElementById('Accelerometer_ty').innerHTML = "Accelerometer Y-axis: "+event.acceleration.y.toFixed(10);
+  if (event.acceleration.z != null)
+        document.getElementById('Accelerometer_tz').innerHTML = "Accelerometer Z-axis: "+event.acceleration.z.toFixed(10);
+  
+  if (event.interval != null)
+        document.getElementById('Accelerometer_ti').innerHTML = "Data Interval: "+event.interval.toFixed(10);
+  
+  if (event.rotationRate.alpha != null)
+        document.getElementById('Gyro_tz').innerHTML = "Gyro Z-axis: "+event.rotationRate.alpha.toFixed(10);
+  if (event.rotationRate.beta != null)
+        document.getElementById('Gyro_tx').innerHTML = "Gyro X-axis: "+event.rotationRate.beta.toFixed(10);
+  if (event.rotationRate.gamma != null)
+        document.getElementById('Gyro_ty').innerHTML = "Gyro Y-axis: "+event.rotationRate.gamma.toFixed(10);
+  //setTimeout(handler,5000);
+}
+
+
+</script>
+</body>
+</html>
