@@ -7,9 +7,9 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <title>JavaScript Sensor Access Demo</title>
     <style>
-      p {margin-bottom: 0.3rem;}
       #demo-div {color: lightgrey; border-radius: 0.3rem;}
       #demo-div span, #demo-div #num-observed-events {color: black;}
+      h1 {margin-top: 0.5rem;}
     </style>
 </head>
 <body>
@@ -17,12 +17,11 @@
 
 <h1 align="left">JavaScript Sensor Access Demo</h1>
 
-<p>This is a demo page showcasing how websites can access sensor data from mobile devices.</p>
+<p>This demo page shows how websites can access sensor data from mobile devices using <a href="https://developer.mozilla.org/en-US/docs/Web/Events/devicemotion"><i>deviceorientation</i></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/Events/deviceorientation"><i>devicemotion</i></a> events.</p>
 
-<p>Two sensor events supported by all modern browsers are
-<a href="https://developer.mozilla.org/en-US/docs/Web/Events/devicemotion"><i>deviceorientation</i></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/Events/deviceorientation"><i>devicemotion</i></a>. <i>deviceorientation</i> provides <i>alpha</i>, <i>beta</i> and <i>gamma</i> components which correspond to orientation along the Z, X and Y axes, respectively. <i>devicemotion</i> provides acceleration and rotation rate along three axes using MEMS accelerometers and gyroscopes.</p>
+<p><i>deviceorientation</i> provides <i>alpha</i>, <i>beta</i> and <i>gamma</i> components which correspond to orientation along the Z, X and Y axes, respectively.</p><p><i>devicemotion</i> provides acceleration and rotation rate along three axes using MEMS accelerometers and gyroscopes.</p>
 
-<p>The sensor data shown below does not leave your browser: it is not collected, shared or transmitted. However this may not be true for other websites that you visit. See the companion web page for the ACM CCS'18 paper <a href="https://sensor-js.xyz/">"The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors"</a> for more information.</p>
+<p>The sensor data shown below does not leave your browser: it is not collected, shared or transmitted. However this may not be true for other websites that you visit. For more information, see the companion page for our study: <a href="https://sensor-js.xyz/">"The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors"</a>.</p>
 
 <div class="p-3 mb-2 bg-secondary" id="demo-div">
 <a id="start_demo" class="btn btn-lg btn-success" href="#demo-div" role="button">Start the demo</a>
