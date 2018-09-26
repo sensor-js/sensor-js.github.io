@@ -146,7 +146,7 @@
         <a class="nav-link" href="#findings">Findings</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/demo.html"><img src="assets/images/external-link.png" id="ext_link">Demo</a>
+        <a class="nav-link" href="/demo.html">Demo<img src="assets/images/external-link.png" id="ext_link"></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#sensor-js-table">List of scripts</a>
@@ -311,8 +311,7 @@
 	</div>
 
 		<p>By clustering scripts based on <a href="/assets/features.csv">features</a> extracted from instrumentation data we were able to classify major use cases. We found that sensor data are commonly used for tracking and analytics, verifying ad impressions, and distinguishing real devices from bots.</p>
-		<div class="col-md-12">
-		<table class="sortable table table-striped table-bordered">
+		<table class="table table-striped table-bordered">
 		  <tr id="id">
 			<th>ID</th>
 		    <th>Use case</th>
@@ -377,10 +376,8 @@
 			<td>0.00%</td>
 		  </tr>
 		</table>
-		</div>
 
 		<p>We also found that a large fraction of the scripts that access sensors also perform browser fingerprinting.</p>
-		<div class="col-md-12">
 		<table class="table table-striped table-bordered">
 		  <tr>
 			<th>Sensor</th>
@@ -433,8 +430,6 @@
 			<td>82</td>
 		  </tr>
 		</table>
-		</div>
-
 
 	<div id="efficacy-of-antitrackers" class="page-header">
 		<h4>Ad blocking and tracking protection lists miss many scripts</h4>
