@@ -28,3 +28,8 @@ div.page-header{
 html {
   scroll-behavior: smooth;
 }
+
+#ext_link{
+  margin-right: 3px;
+  margin-top: -4px;
+}
