@@ -21,6 +21,7 @@
 
     <script src="https://sensor-js.xyz/assets/js/popper.min.js"></script>
     <script src="https://sensor-js.xyz/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" async src="https://sensor-js.xyz/assets/js/MathJax/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
     <script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf-8">
@@ -36,110 +37,109 @@
 				appendChild(msViewportStyle);
 		}
 
-   </script>
-	 <script>
-    // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
-		$.get('/assets/sensor-accessing-script-domain-feats-usecase.csv', function(data) {
+</script>
+<script>
+$(function() {
+  // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
+  $.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain-feats-usecase.csv', function(data) {
+    // start the table
+    var html = '<table id ="sensor_js_urls" class="data-table table table-striped table-bordered">';
+    html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Fingerprinting</th><th>Use cases</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Norm. prominence</th></tr></thead>';
+    // split into lines
+    var rows = data.split("\n");
 
-			// start the table
-			var html = '<table id ="sensor_js_urls" class="data-table table table-striped table-bordered">';
-      html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Fingerprinting</th><th>Use cases</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Norm. prominence</th></tr></thead>';
-			// split into lines
-			var rows = data.split("\n");
+    html+='<tbody>'
+    // parse lines
+    rows.forEach( function getvalues(ourrow) {
+      // split line into columns
+      var columns = ourrow.split("\t");
+      if (columns.length != 7) { return; }
+      // start a table row
+      html += "<tr>";
+      html += "<td><i>" + columns[0] + "</i></td>";
+      html += "<td>" + columns[1] + "</td>";
+      html += "<td>" + columns[2] + "</td>";
 
-		  html+='<tbody>'
-			// parse lines
-			rows.forEach( function getvalues(ourrow) {
-				// split line into columns
-				var columns = ourrow.split("\t");
-        if (columns.length != 7) { return; }
-				// start a table row
-				html += "<tr>";
-				html += "<td><i>" + columns[0] + "</i></td>";
-				html += "<td>" + columns[1] + "</td>";
-				html += "<td>" + columns[2] + "</td>";
+      var usecases = columns[6].split(",");
+      var i;
+      var text="";
+      for (i = 0; i < usecases.length; i++) {
+          text += "<a href=\"#"+ usecases[i] + "\">"+ usecases[i] +"</a>";
+        if (i<usecases.length-1){
+          text += ", ";
+        }
+      }
+      html += "<td>" + text + "</td>";
+      html += "<td>" + columns[3] + "</td>";
+          html += "<td>" + columns[4] + "</td>";
+          // 12.09 is the max prominence for 100K sites
+          html += "<td>" + (parseFloat(columns[5])/12.09*100).toFixed(2) + "%</td>";
 
-				var usecases = columns[6].split(",");
-				var i;
-				var text="";
-				for (i = 0; i < usecases.length; i++) {
-				    text += "<a href=\"#"+ usecases[i] + "\">"+ usecases[i] +"</a>";
-					if (i<usecases.length-1){
-						text += ", ";
-					}
-				}
-				html += "<td>" + text + "</td>";
-				html += "<td>" + columns[3] + "</td>";
-        		html += "<td>" + columns[4] + "</td>";
-            // 12.09 is the max prominence for 100K sites
-        		html += "<td>" + (parseFloat(columns[5])/12.09*100).toFixed(2) + "%</td>";
+      // close row
+      html += "</tr>";
+    })
+    // close table
+    html += "</tbody>";
+    html += "</table>";
 
-				// close row
-				html += "</tr>";
-			})
-			// close table
-      html += "</tbody>";
-			html += "</table>";
+    // insert into div
+    $('#table-holder').append(html);
 
-			// insert into div
-			$('#table-holder').append(html);
+    $('#sensor_js_urls').dataTable( {
+      "iDisplayLength": 10,
+      "sDom": '<lfip<t>>',
+      "aaSorting": [[5, 'desc']],
+    });
+  });
+});
+</script>
+<script>
+// modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
+$(function() {
+  $.get('https://sensor-js.xyz/assets/domain_sensor_script.csv', function(data) {
+    // start the table
+    var html = '<table id ="sensor_domain_urls" class="data-table table table-striped table-bordered">';
+        html += '<thead><tr><th>Rank</th><th>Domain</th><th>Sensors</th><th>Sensor-accessing script domain(s)</th></tr></thead>';
+    // split into lines
+    var rows = data.split("\n");
 
-			$('#sensor_js_urls').dataTable( {
-		                "iDisplayLength": 10,
-		                "sDom": '<lfip<t>>',
-                    "aaSorting": [[5, 'desc']],
-		            });
-		});
+    html+='<tbody>'
+    // parse lines
+    rows.forEach( function getvalues(ourrow) {
+      // split line into columns
+      var columns = ourrow.split("\t");
+      if (columns.length != 4) { return; }
+      // start a table row
+      html += "<tr>";
+      html += "<td>" + columns[0] + "</td>";
+      html += "<td><i>" + columns[1] + "</i></td>";
+      html += "<td>" + columns[2] + "</td>";
+      html += "<td>" + columns[3] + "</td>";
+      // close row
+      html += "</tr>";
+    })
+    // close table
+    html += "</tbody>";
+    html += "</table>";
 
-	</script>
+    // insert into div
+    $('#table-holder-domain').append(html);
 
-	 <script>
-    // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
-		$.get('/assets/domain_sensor_script.csv', function(data) {
-			// start the table
-			var html = '<table id ="sensor_domain_urls" class="data-table table table-striped table-bordered">';
-      	  html += '<thead><tr><th>Rank</th><th>Domain</th><th>Sensors</th><th>Sensor-accessing script domain(s)</th></tr></thead>';
-			// split into lines
-			var rows = data.split("\n");
-
-		  html+='<tbody>'
-			// parse lines
-			rows.forEach( function getvalues(ourrow) {
-				// split line into columns
-				var columns = ourrow.split("\t");
-        if (columns.length != 4) { return; }
-				// start a table row
-				html += "<tr>";
-				html += "<td>" + columns[0] + "</td>";
-				html += "<td><i>" + columns[1] + "</i></td>";
-				html += "<td>" + columns[2] + "</td>";
-				html += "<td>" + columns[3] + "</td>";
-				// close row
-				html += "</tr>";
-			})
-			// close table
-      html += "</tbody>";
-			html += "</table>";
-
-			// insert into div
-			$('#table-holder-domain').append(html);
-
-			$('#sensor_domain_urls').dataTable( {
-		                "iDisplayLength": 10,
-		                "sDom": '<lfip<t>>'
-		            });
-		});
-
-	</script>
-
-  </head>
-  <body>
-  <header>
+    $('#sensor_domain_urls').dataTable( {
+                  "iDisplayLength": 10,
+                  "sDom": '<lfip<t>>'
+              });
+  });
+});
+</script>
+</head>
+<body>
+<header>
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <span class="navbar-brand d-flex flex-fill" id="brand-span">The Web's Sixth Sense</span>
+  <span class="navbar-brand d-flex flex-fill" id="brand-span"><a href="https://sensor-js.xyz/" class="nav-link navbar-brand">The Web's Sixth Sense</a></span>
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -541,7 +541,6 @@
     </footer>
     </main>
 
-    <script type="text/javascript" async src="assets/js/MathJax/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script>
       $(function () {
         $('[data-toggle="tooltip"]').tooltip()
