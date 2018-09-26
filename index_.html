@@ -139,7 +139,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <span class="navbar-brand d-flex flex-fill">The Web's Sixth Sense</span>
+  <span class="navbar-brand d-flex flex-fill" id="brand-span">The Web's Sixth Sense</span>
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -551,6 +551,9 @@
       $(function () {
         $('[data-toggle="tooltip"]').tooltip()
       })
+      $('.navbar-nav>li>a').on('click', function(){
+          $('.navbar-collapse').collapse('hide');
+      });
       // Modified from https://stackoverflow.com/a/49331692
       var divId;
       $('.nav-link').click(function(){

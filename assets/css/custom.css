@@ -33,3 +33,7 @@ html {
   margin-right: 3px;
   margin-top: -4px;
 }
+
+#brand-span{
+  padding: 0.5rem;
+}
