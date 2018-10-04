@@ -12,18 +12,18 @@
 
     <!-- CSS to customize styles -->
     <link href="/assets/css/custom.css" rel="stylesheet">
-    <script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery-1.9.1.min.js"></script>
-    <link rel="stylesheet" href="https://sensor-js.xyz/assets/css/jquery-ui.css" />
-    <script src="https://sensor-js.xyz/assets/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/jquery-ui.css" />
+    <script src="/assets/js/jquery-ui.min.js"></script>
 		<style type="text/css" title="currentStyle">
-		        @import "https://sensor-js.xyz/assets/css/demo_table.css";
+		        @import "/assets/css/demo_table.css";
 		</style>
 
-    <script src="https://sensor-js.xyz/assets/js/popper.min.js"></script>
-    <script src="https://sensor-js.xyz/assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" async src="https://sensor-js.xyz/assets/js/MathJax/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" async src="/assets/js/MathJax/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
-    <script type="text/javascript" language="javascript" src="https://sensor-js.xyz/assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/assets/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf-8">
 
     	if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
@@ -38,10 +38,11 @@
 		}
 
 </script>
+    <script type="text/javascript" language="javascript" src="/assets/js/clipboard.min.js"></script>
 <script>
 $(function() {
   // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
-  $.get('https://sensor-js.xyz/assets/sensor-accessing-script-domain-feats-usecase.csv', function(data) {
+  $.get('/assets/sensor-accessing-script-domain-feats-usecase.csv', function(data) {
     // start the table
     var html = '<table id ="sensor_js_urls" class="data-table table table-striped table-bordered">';
     html += '<thead><tr><th>Sensor-accessing domain</th><th>Sensors</th><th>Fingerprinting</th><th>Use cases</th><th>Found on (top 3 sites)</th><th>Total Sites</th><th>Norm. prominence</th></tr></thead>';
@@ -96,7 +97,7 @@ $(function() {
 <script>
 // modified code from https://webtransparency.cs.princeton.edu/webcensus/canvas_scripts.html
 $(function() {
-  $.get('https://sensor-js.xyz/assets/domain_sensor_script.csv', function(data) {
+  $.get('/assets/domain_sensor_script.csv', function(data) {
     // start the table
     var html = '<table id ="sensor_domain_urls" class="data-table table table-striped table-bordered">';
         html += '<thead><tr><th>Rank</th><th>Domain</th><th>Sensors</th><th>Sensor-accessing script domain(s)</th></tr></thead>';
@@ -531,12 +532,16 @@ $(function() {
     In <i>Proceedings of the 25th ACM Conference on Computer and Communications Security (CCS),
       Toronto, Canada, October 15–19, 2018</i>. (Forthcoming)
     </p>
-    <p><b>BibTeX:</b></p>
-<pre><code>@inproceedings{sensor-js-2018,
-  author    = "Anupam Das and Gunes Acar and Nikita Borisov and Amogh Pradeep",
-  title     = "{The Web's Sixth Sense: A Study of Scripts Accessing Smartphone Sensors}",
-  booktitle = {Proceedings of ACM CCS 2018},
-  year      = "2018",
+    <p><b>BibTeX:</b> <button class="btn btn-sm btn-info btn-bibtex" data-clipboard-target=".bibtex-code">Copy to clipboard</button></p>
+<pre><code class="bibtex-code">@inproceedings{sensor-js-2018,
+  author    = {Anupam Das and Gunes Acar and Nikita Borisov and Amogh Pradeep},
+  title     = {The {Web's} Sixth Sense: A Study of Scripts Accessing Smartphone Sensors},
+  booktitle = {Proceedings of the 25th ACM Conference on Computer and Communication Security (CCS)},
+  year      = 2018,
+  month     = oct,
+  publisher = {ACM},
+  doi       = {10.1145/3243734.3243860},
+  url       = {https://doi.org/0.1145/3243734.3243860}
 }</code></pre>
 
 
@@ -575,6 +580,12 @@ $(function() {
         }, 100);
       });
     </script>
+    <script>
+    $(function() {
+      var clipboard = new ClipboardJS('.btn-bibtex');
+    });
+    </script>
+
 
   </body>
 </html>
