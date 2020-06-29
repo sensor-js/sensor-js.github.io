@@ -110,6 +110,15 @@ let is_running = false;
 let demo_button = document.getElementById("start_demo");
 demo_button.onclick = function(e) {
   e.preventDefault();
+  
+  // Request permission for iOS 13+ devices
+  if (
+    DeviceMotionEvent &&
+    typeof DeviceMotionEvent.requestPermission === "function"
+  ) {
+    DeviceMotionEvent.requestPermission();
+  }
+  
   if (is_running){
     window.removeEventListener("devicemotion", handleMotion);
     window.removeEventListener("deviceorientation", handleOrientation);
